@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App" id="outer-container">
       <div className="page-wrap" id="app-page-wrap">
-        <h1>Welcome to this Application</h1>
+        <h1>Welcome to Scrum Board</h1>
         {isLoginPage ? <Login /> : <Register />}
         <button onClick={togglePage}>
           {isLoginPage ? "Register" : "Login"}

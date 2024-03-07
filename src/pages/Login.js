@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
+import "./Login.css"; //
 
 function Login() {
     const updateName = userStore((state) => state.updateName);
@@ -41,28 +42,36 @@ function Login() {
         }
     }
 
-
     return (
         <div className="Login" id="profile-outer-container">
             <div className="page-wrap" id="login-page-wrap">
                 <h1>Login</h1>
                 <form onSubmit={handleSubmit}>
-                    <label>Enter your username:
+                    <div className="input-fields"> {/* Encapsulate input fields */}
+                        <label htmlFor="username">Enter your username:</label>
                         <input type="text"
+                            id="username"
                             name="username"
                             value={inputs.username}
                             onChange={handleChange}
                         />
-                    </label>
 
-                    <label>Enter your password:
+                        <label htmlFor="password">Enter your password:</label>
                         <input type="password"
+                            id="password"
                             name="password"
                             value={inputs.password}
                             onChange={handleChange}
                         />
-                    </label>
-                    <input type="submit" value="Login" />
+                    </div>
+
+                    <div className="register-button"> {/* Encapsulate register button */}
+                        <input type="submit" value="Login" />
+                    </div>
+                    
+                    {/* Add some space */}
+                    <br /><br />
+
                     <p>If you're not registered yet, register before logging in.</p>
                 </form>
             </div>

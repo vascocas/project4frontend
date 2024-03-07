@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
+import "./Register.css"; //
 
 function Register() {
     const updateName = userStore((state) => state.updateName);
