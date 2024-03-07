@@ -32,7 +32,7 @@ function Register() {
                 throw new Error('Registration failed');
             }
 
-            // Assuming successful registration, update the username in userStore
+            // On successful registration, update the username in userStore
             updateName(username);
             alert('Successful Register');
             navigate('/Login', { replace: true }); // Navigate to Login page after successful registration

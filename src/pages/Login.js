@@ -4,7 +4,7 @@ import { userStore } from "../stores/UserStore";
 
 function Login() {
     const updateName = userStore((state) => state.updateName);
-    const [inputs, setInputs] = useState({ email: "", password: "" });
+    const [inputs, setInputs] = useState({ username: "", password: "" });
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -16,26 +16,24 @@ function Login() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { email, password } = inputs;
+        const { username, password } = inputs;
 
         try {
             const response = await fetch('http://localhost:8080/my_activities_backend/rest/user/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json', // Specify content type
+                    'Content-Type': 'application/json',
+                    'username': username,
+                    'password': password, 
                 },
-                body: JSON.stringify({ // Send data in the request body as JSON
-                    email,
-                    password,
-                }),
             });
 
             if (!response.ok) {
                 throw new Error('Login failed');
             }
 
-            // Assuming successful login, update the username in userStore
-            updateName(email);
+            // On successful login, update the username in userStore
+            updateName(username);
             navigate('/Home', { replace: true });
         } catch (error) {
             console.error('Error logging in:', error);
@@ -43,15 +41,16 @@ function Login() {
         }
     }
 
+
     return (
         <div className="Login" id="profile-outer-container">
             <div className="page-wrap" id="login-page-wrap">
                 <h1>Login</h1>
                 <form onSubmit={handleSubmit}>
-                    <label>Enter your email:
-                        <input type="email"
-                            name="email"
-                            value={inputs.email}
+                    <label>Enter your username:
+                        <input type="text"
+                            name="username"
+                            value={inputs.username}
                             onChange={handleChange}
                         />
                     </label>
