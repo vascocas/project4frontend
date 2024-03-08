@@ -1,7 +1,8 @@
 import React from "react"
 import Sidebar from '../components/navbar/Sidebar'
 import '../index.css'
-import { userStore } from "../stores/UserStore"
+import { userStore } from "../stores/UserStore";
+
 
 
 function Profile(){

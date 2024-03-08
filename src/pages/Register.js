@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
-import "./Register.css"; //
+import "./Register.css";
+
 
 function Register() {
     const updateName = userStore((state) => state.updateName);
-    const [inputs, setInputs] = useState({ username: "", password: "", email: "", name: "" });
+    const [inputs, setInputs] = useState({
+        username: "",
+        password: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        phone: "",
+        photo: ""
+    });
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -17,16 +26,16 @@ function Register() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { username, password, email, name } = inputs;
+        const { username, password, email, firstName, lastName, phone, photo } = inputs;
 
         try {
-            const response = await fetch('http://localhost:8080/my_activities_backend/rest/user/register', {
+            const response = await fetch('http://localhost:8080/project4vc/rest/users/register', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password, email, name })
+                body: JSON.stringify({ username, password, email, firstName, lastName, phone, photo })
             });
 
             if (!response.ok) {
@@ -72,10 +81,34 @@ function Register() {
                         />
                     </label>
 
-                    <label>Enter your name:
+                    <label>Enter your first name:
                         <input type="text"
-                            name="name"
-                            value={inputs.name}
+                            name="firstName"
+                            value={inputs.firstName}
+                            onChange={handleChange}
+                        />
+                    </label>
+
+                    <label>Enter your last name:
+                        <input type="text"
+                            name="lastName"
+                            value={inputs.lastName}
+                            onChange={handleChange}
+                        />
+                    </label>
+
+                    <label>Enter your phone number:
+                        <input type="text"
+                            name="phone"
+                            value={inputs.phone}
+                            onChange={handleChange}
+                        />
+                    </label>
+
+                    <label>Enter your photo URL:
+                        <input type="text"
+                            name="photo"
+                            value={inputs.photo}
                             onChange={handleChange}
                         />
                     </label>

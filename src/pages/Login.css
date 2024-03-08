@@ -14,6 +14,15 @@
     margin-bottom: 20px;
 }
 
+.page-wrap {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center; /* Add this line */
+  }
+
 /* Add margin-bottom to the input field for password */
 .input-fields label:nth-child(2) input {
     margin-bottom: 10px; /* Adjust the value as needed */
