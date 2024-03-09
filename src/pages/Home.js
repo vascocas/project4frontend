@@ -10,33 +10,35 @@ function Home() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const getAllTasks = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:8080/project4vc/rest/tasks/all",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              token: token,
-            },
+    if (token) {
+      const getAllTasks = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:8080/project4vc/rest/tasks/all",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                token: token,
+              },
+            }
+          );
+
+          if (response.ok) {
+            const tasks = await response.json();
+            setTasks(tasks);
+          } else {
+            const message = await response.text();
+            alert(message);
           }
-        );
-
-        if (response.ok) {
-          const tasks = await response.json();
-          setTasks(tasks);
-        } else {
-          const message = await response.text();
-          alert(message);
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to fetch tasks. Please try again.");
         }
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to fetch tasks. Please try again.");
-      }
-    };
+      };
 
-    getAllTasks();
+      getAllTasks();
+    }
   }, [token]); // Make sure to include token as a dependency to trigger the effect when it changes
 
   return (
@@ -78,8 +80,6 @@ function TaskColumn({ title, tasks }) {
       <ul>
         {/* Render tasks */}
         {sortedTasks.map((task) => {
-          console.log("Task Status:", task.state);
-          console.log("Task Priority:", task.priority);
           return (
             <li
               key={task.id}
@@ -119,7 +119,10 @@ function compareTasks(taskA, taskB) {
   // First, compare by priority
   if (taskA.priority !== taskB.priority) {
     const priorityOrder = ["LOW_PRIORITY", "MEDIUM_PRIORITY", "HIGH_PRIORITY"];
-    return priorityOrder.indexOf(taskB.priority) - priorityOrder.indexOf(taskA.priority);
+    return (
+      priorityOrder.indexOf(taskB.priority) -
+      priorityOrder.indexOf(taskA.priority)
+    );
   }
   // If priority is equal, compare by start date
   const startDateA = new Date(taskA.startDate);

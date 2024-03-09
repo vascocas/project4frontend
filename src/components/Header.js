@@ -1,10 +1,12 @@
 import React from 'react';
 import './Header.css';
+import { useNavigate } from 'react-router-dom';
 import { userStore } from "../stores/UserStore";
 
 const Header = () => {
   const { username, token, updateName, updateToken } = userStore();
-  
+  const navigate = useNavigate(); // Initialize the useNavigate hook
+
   const handleLogout = async () => {
     try {
       const response = await fetch(
@@ -24,6 +26,7 @@ const Header = () => {
 
       updateName(""); // Clear username
       updateToken(""); // Clear token
+      navigate('/login'); // Redirect to the Login page after successful logout
     } catch (error) {
       console.error("Error logging out:", error);
       alert("Logout failed. Please try again.");
