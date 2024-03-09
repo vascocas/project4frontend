@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
 import { userStore } from "../stores/UserStore";
-
 import "../index.css";
+import "./Home.css";
 
 function Home() {
-  const { username, token, updateName, updateToken } = userStore();
+  const { username, token } = userStore();
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -39,34 +39,9 @@ function Home() {
     getAllTasks();
   }, [token]); // Make sure to include token as a dependency to trigger the effect when it changes
 
-  const handleLogout = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:8080/project4vc/rest/users/logout",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            token: token,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Logout failed");
-      }
-
-      updateName(""); // Clear username
-      updateToken(""); // Clear token
-    } catch (error) {
-      console.error("Error logging out:", error);
-      alert("Logout failed. Please try again.");
-    }
-  };
-
   return (
     <div className="Home" id="home-outer-container">
-      <Header user={username} onLogout={handleLogout} />
+      <Header user={username} />
       <Sidebar
         pageWrapId={"home-page-wrap"}
         outerContainerId={"home-outer-container"}
@@ -93,87 +68,86 @@ function Home() {
   );
 }
 
-
 // TaskColumn component to render tasks within a column with sorting and background color adjustment
 function TaskColumn({ title, tasks }) {
-    const sortedTasks = sortTasks(tasks);
-  
-    return (
-      <div className="task-column">
-        <h2>{title}</h2>
-        <ul>
-          {/* Render tasks */}
-          {sortedTasks.map((task) => {
-            console.log("Task Status:", task.state);
-            console.log("Task Priority:", task.priority);
-            return (
-              <li
-                key={task.id}
-                style={{ backgroundColor: getPriorityColor(task.priority) }}
-              >
-                <TaskCard title={task.title} priority={task.priority} />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  }
-  
-  // TaskCard component to render individual task cards
-  function TaskCard({ title, priority }) {
-    // Determine priority class
-    let priorityClass = "";
-    if (priority === "LOW_PRIORITY") {
-      priorityClass = "LOW_PRIORITY";
-    } else if (priority === "MEDIUM_PRIORITY") {
-      priorityClass = "MEDIUM_PRIORITY";
-    } else if (priority === "HIGH_PRIORITY") {
-      priorityClass = "HIGH_PRIORITY";
-    }
-  
-    return (
-      <ul className={`card ${priorityClass}`}>
-        <div className="card-header">{title}</div>
-        {/* Add more card content here if needed */}
+  const sortedTasks = sortTasks(tasks);
+
+  return (
+    <div className="task-column">
+      <h2>{title}</h2>
+      <ul>
+        {/* Render tasks */}
+        {sortedTasks.map((task) => {
+          console.log("Task Status:", task.state);
+          console.log("Task Priority:", task.priority);
+          return (
+            <li
+              key={task.id}
+              style={{ backgroundColor: getPriorityColor(task.priority) }}
+            >
+              <TaskCard title={task.title} priority={task.priority} />
+            </li>
+          );
+        })}
       </ul>
-    );
+    </div>
+  );
+}
+
+// TaskCard component to render individual task cards
+function TaskCard({ title, priority }) {
+  // Determine priority class
+  let priorityClass = "";
+  if (priority === "LOW_PRIORITY") {
+    priorityClass = "low-priority";
+  } else if (priority === "MEDIUM_PRIORITY") {
+    priorityClass = "medium-priority";
+  } else if (priority === "HIGH_PRIORITY") {
+    priorityClass = "high-priority";
   }
-  
-  // Define a comparison function for sorting tasks
-  function compareTasks(taskA, taskB) {
-    // First, compare by priority
-    if (taskA.priority !== taskB.priority) {
-      const priorityOrder = ["HIGH_PRIORITY", "MEDIUM_PRIORITY", "LOW_PRIORITY"];
-      return priorityOrder.indexOf(taskB.priority) - priorityOrder.indexOf(taskA.priority);
-    }
-    // If priority is equal, compare by start date
-    const startDateA = new Date(taskA.startDate);
-    const startDateB = new Date(taskB.startDate);
-    if (startDateA.getTime() !== startDateB.getTime()) {
-      return startDateA.getTime() - startDateB.getTime();
-    }
-    // If start dates are equal, compare by end date
-    const endDateA = new Date(taskA.endDate);
-    const endDateB = new Date(taskB.endDate);
-    return endDateA.getTime() - endDateB.getTime();
+
+  return (
+    <div className={`task-card ${priorityClass}`}>
+      <div className="card-header">{title}</div>
+      {/* Add more card content here if needed */}
+    </div>
+  );
+}
+
+// Define a comparison function for sorting tasks
+function compareTasks(taskA, taskB) {
+  // First, compare by priority
+  if (taskA.priority !== taskB.priority) {
+    const priorityOrder = ["LOW_PRIORITY", "MEDIUM_PRIORITY", "HIGH_PRIORITY"];
+    return priorityOrder.indexOf(taskB.priority) - priorityOrder.indexOf(taskA.priority);
   }
-  
-  // Function to sort tasks by multiple parameters
-  function sortTasks(tasks) {
-    return tasks.slice().sort(compareTasks); // Use slice() to avoid mutating original tasks array
+  // If priority is equal, compare by start date
+  const startDateA = new Date(taskA.startDate);
+  const startDateB = new Date(taskB.startDate);
+  if (startDateA.getTime() !== startDateB.getTime()) {
+    return startDateA.getTime() - startDateB.getTime();
   }
-  
-  // Function to get background color based on priority
-  function getPriorityColor(priority) {
-    if (priority === "HIGH_PRIORITY") {
-      return "red";
-    } else if (priority === "MEDIUM_PRIORITY") {
-      return "yellow";
-    } else if (priority === "LOW_PRIORITY") {
-      return "green";
-    }
-    return ""; // Default color if priority is not recognized
+  // If start dates are equal, compare by end date
+  const endDateA = new Date(taskA.endDate);
+  const endDateB = new Date(taskB.endDate);
+  return endDateA.getTime() - endDateB.getTime();
+}
+
+// Function to sort tasks by multiple parameters
+function sortTasks(tasks) {
+  return tasks.slice().sort(compareTasks); // Use slice() to avoid mutating original tasks array
+}
+
+// Function to get background color based on priority
+function getPriorityColor(priority) {
+  if (priority === "HIGH_PRIORITY") {
+    return "red";
+  } else if (priority === "MEDIUM_PRIORITY") {
+    return "yellow";
+  } else if (priority === "LOW_PRIORITY") {
+    return "green";
   }
-  
-  export default Home;
+  return ""; // Default color if priority is not recognized
+}
+
+export default Home;
