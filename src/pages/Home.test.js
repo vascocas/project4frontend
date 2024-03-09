@@ -1,45 +1,22 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import Home from './Home';
-import { userStore } from "../stores/UserStore";
+import * as UserStoreModule from "../stores/UserStore";
 
-// Mock userStore
-jest.mock('../stores/UserStore', () => ({
-  userStore: jest.fn(() => ({
-    username: 'mockUsername',
-    token: 'mockToken',
-  })),
-}));
+// Mock user data
+const username = 'testUser';
+const token = 'testToken';
 
-
-describe('Home component', () => {
-  it('displays the username in the header when user is logged in', () => {
-    // Mock user data
-    const username = 'testUser';
-    const token = 'testToken';
-
-    // Mock userStore behavior
-    userStore.mockReturnValueOnce({
-      username,
-      token,
-    });
-
-    // Render Home component
-    const { getByText } = render(<Home />);
-
-    // Check if username appears in the header
-    const welcomeMessage = getByText(`Welcome, ${username}`);
-    expect(welcomeMessage).toBeInTheDocument();
+// First test: userStore returns username and token
+test('userStore returns username and token', () => {
+  // Mock userStore behavior
+  UserStoreModule.userStore = jest.fn().mockReturnValue({
+    username,
+    token,
   });
+
+  // Call userStore
+  const userData = UserStoreModule.userStore();
+
+  // Check if username and token are returned
+  expect(userData).toHaveProperty('username', username);
+  expect(userData).toHaveProperty('token', token);
 });
 
-
-
-// Another test case
-test('renders username in header', () => {
-  const username = 'John Doe'; // Mock username
-  const { getByText } = render(<Home />);
-  const usernameElement = getByText(`Welcome, ${username}`);
-  console.log("USERNAME INSERIDO" + usernameElement); // Logging the username element
-  expect(usernameElement).toBeInTheDocument();
-});

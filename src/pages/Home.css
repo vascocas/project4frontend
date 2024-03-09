@@ -1,27 +1,32 @@
-/* CSS for TaskCard component */
-.task-card {
-    background-color: #ffffff; /* Default background color */
-    border-radius: 4px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 12px;
-    margin-bottom: 12px;
-  }
-  
-  .card-header {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333333;
-  }
-  
-  .low-priority {
-    border-left: 4px solid green;
-  }
-  
-  .medium-priority {
-    border-left: 4px solid yellow;
-  }
-  
-  .high-priority {
-    border-left: 4px solid red;
-  }
-  
+/* CSS for Home component */
+.page-title {
+  text-align: center;
+}
+
+.page-wrap {
+  width: 100%;
+  max-width: 1200px; /* Adjust max-width as needed */
+  margin: 0 auto; /* Center the page-wrap horizontally */
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+.add-task-form,
+.tasks-board {
+  flex: 1;
+  margin-right: 20px; /* Add spacing between AddTaskForm and TasksBoard */
+  border: 1px solid #ccc; /* Add border around the columns */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  padding: 10px; /* Add padding inside the columns */
+  height: 90vh;
+}
+
+.tasks-board {
+  flex: 3; /* TasksBoard takes up more space */
+  margin-right: 0;
+}

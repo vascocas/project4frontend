@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import '../index.css';
 import Header from "../components/Header";
 import Sidebar from '../components/navbar/Sidebar';
-import '../index.css';
 import { userStore } from "../stores/UserStore";
 
 function Activity() {
@@ -68,32 +68,7 @@ function Activity() {
             <Header />
             <Sidebar pageWrapId={'activity-page-wrap'} outerContainerId={'activity-outer-container'} />
             <div className="page-wrap" id="activity-page-wrap">
-                <div>
-                    <h1>My Activities</h1>
-                    <p>Welcome {username}</p>
-                </div>
-                <div>
-                    <table className="tables" cellPadding="0" cellSpacing="0">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {activities.map(activity =>
-                                <tr key={activity.id}>
-                                    <td>{activity.id}</td>
-                                    <td>{activity.title}</td>
-                                    <td>{activity.description}</td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
-
-                <h1>Add a New Activity</h1>
+              <h1>Add a New Task</h1>
                 <div>
                     <form onSubmit={handleSubmit}>
                         <label>Activity Title:

@@ -1,0 +1,53 @@
+/* CSS for TasksBoard component */
+.task-columns {
+    display: flex; /* Use flexbox layout */
+    justify-content: space-between;
+  }
+  
+  .task-column {
+    flex: 1; /* Each column takes up equal space */
+    border: 1px solid #ccc; /* Add border around each column */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    padding: 10px; /* Add padding inside the columns */
+    height: auto; /* Set height to auto to match content */
+    max-height: calc(100vh - 120px); /* Limit max height of columns */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+  }
+  
+  .task-column:last-child {
+    margin-right: 0; /* Remove margin from the last column */
+  }
+  
+  .task-column h2 {
+    text-align: center; /* Center align column title */
+  }
+  
+  .task-column ul {
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .task-card {
+    margin-bottom: 10px; /* Add margin between task cards */
+    padding: 10px; /* Add padding to task cards */
+    border: 1px solid #ccc; /* Add border to task cards */
+    border-radius: 5px; /* Add border radius to task cards */
+  }
+  
+  .card-header {
+    font-weight: bold; /* Make task title bold */
+  }
+  
+  /* Priority colors */
+  .low-priority {
+    background-color: green;
+  }
+  
+  .medium-priority {
+    background-color: yellow;
+  }
+  
+  .high-priority {
+    background-color: red;
+  }
