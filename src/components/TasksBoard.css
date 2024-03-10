@@ -37,17 +37,17 @@
   
   .card-header {
     font-weight: bold; /* Make task title bold */
-  }
-  
-  /* Priority colors */
-  .low-priority {
+  }  
+
+  .task-card.low-priority {
     background-color: green;
   }
   
-  .medium-priority {
+  .task-card.medium-priority {
     background-color: yellow;
   }
   
-  .high-priority {
+  .task-card.high-priority {
     background-color: red;
   }
+  
