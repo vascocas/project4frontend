@@ -1,6 +1,5 @@
 import React from 'react';
 import TaskCard from './TaskCard';
-import TaskOptions from './TaskOptions';
 import "./TasksBoard.css";
 
 function TaskColumn({ title, tasks }) {
@@ -12,8 +11,7 @@ function TaskColumn({ title, tasks }) {
       <ul>
         {tasks.map((task) => ( // No need to sort tasks here, as they are already sorted in the parent component
           <li key={task.id}>
-            <TaskCard title={task.title} priority={task.priority} />
-            <TaskOptions taskId={task.id} />
+            <TaskCard title={task.title} priority={task.priority} taskId={task.id} />
           </li>
         ))}
       </ul>
