@@ -7,7 +7,7 @@ import "./TasksBoard.css";
 
 import "./TasksBoard.css";
 
-function TaskCard({ title, priority, taskId }) {
+function TaskCard({ title, priority, taskId, onTaskDelete }) {
 
   const { token } = userStore();
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
@@ -27,8 +27,6 @@ function TaskCard({ title, priority, taskId }) {
 
   const handleRemove = async () => {
     try {
-      console.log("Token:", token);
-    console.log("Task ID:", taskId);
       // Send HTTP request to update task deleted boolean
       const response = await fetch(
         "http://localhost:8080/project4vc/rest/tasks/updateDeleted",
@@ -45,15 +43,13 @@ function TaskCard({ title, priority, taskId }) {
       if (response.ok) {
         const successMessage = await response.text();
         console.log(successMessage);
-        // Handle success response (if needed)
+        onTaskDelete();
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);
-        // Handle error response (if needed)
       }
     } catch (error) {
       console.error("Error:", error);
-      // Handle error (if needed)
     }
   };
 
@@ -89,15 +85,12 @@ function TaskCard({ title, priority, taskId }) {
       if (response.ok) {
         const successMessage = await response.text();
         console.log(successMessage);
-        // Handle success response (if needed)
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);
-        // Handle error response (if needed)
       }
     } catch (error) {
       console.error("Error:", error);
-      // Handle error (if needed)
     }
 
     // Close the options menu after handling the move action
