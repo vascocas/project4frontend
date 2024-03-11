@@ -4,7 +4,7 @@ import { taskStore } from "../stores/TaskStore";
 import { useNavigate } from 'react-router-dom';
 import "./TasksBoard.css";
 
-function TaskCard({ title, priority, taskId, onTaskAction }) {
+function TaskCard({ title, priority, taskId, state, onTaskAction }) {
 
   const { token } = userStore();
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
@@ -24,6 +24,10 @@ function TaskCard({ title, priority, taskId, onTaskAction }) {
   }
 
   const handleRemove = async () => {
+    const confirmation = window.confirm("Are you sure you want to delete this task?");
+    if (!confirmation) {
+      return; // User cancelled the operation
+    }
     try {
       // Send HTTP request to update task deleted boolean
       const response = await fetch(
@@ -63,6 +67,11 @@ function TaskCard({ title, priority, taskId, onTaskAction }) {
   const handleMoveConfirm = async () => {
     if (!selectedColumn) {
       alert("Please select a column.");
+      return;
+    }
+
+    if (selectedColumn === state) {
+      alert("Task is already in the selected column.");
       return;
     }
 

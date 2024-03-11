@@ -16,7 +16,7 @@ function TaskColumn({ title, tasks, onTaskAction }) {
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            <TaskCard title={task.title} priority={task.priority} taskId={task.id} onTaskAction={handleTaskAction} />
+            <TaskCard title={task.title} priority={task.priority} taskId={task.id} state={task.state} onTaskAction={handleTaskAction} />
           </li>
         ))}
       </ul>
