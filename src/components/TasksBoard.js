@@ -47,8 +47,8 @@ function TasksBoard() {
     return tasks.slice().sort(compareTasks); // Use slice() to avoid mutating original tasks array
   }
 
-    // Function to fetch tasks again after deleting a task
-    const handleTaskDelete = () => {
+    // Function to fetch tasks again after task action
+    const handleTaskAction  = () => {
       fetchTasks();
     };
 
@@ -57,17 +57,17 @@ function TasksBoard() {
       <TaskColumn
         title="TODO"
         tasks={tasks.filter((task) => task.state === "TODO")}
-        onTaskDelete={handleTaskDelete}
+        onTaskAction={handleTaskAction}
       />
       <TaskColumn
         title="DOING"
         tasks={tasks.filter((task) => task.state === "DOING")}
-        onTaskDelete={handleTaskDelete}
+        onTaskAction={handleTaskAction}
       />
       <TaskColumn
         title="DONE"
         tasks={tasks.filter((task) => task.state === "DONE")}
-        onTaskDelete={handleTaskDelete}
+        onTaskAction={handleTaskAction}
       />
     </div>
   );

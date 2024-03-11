@@ -4,7 +4,7 @@ import { taskStore } from "../stores/TaskStore";
 import { useNavigate } from 'react-router-dom';
 import "./TasksBoard.css";
 
-function TaskCard({ title, priority, taskId, onTaskDelete }) {
+function TaskCard({ title, priority, taskId, onTaskAction }) {
 
   const { token } = userStore();
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
@@ -41,7 +41,7 @@ function TaskCard({ title, priority, taskId, onTaskDelete }) {
       if (response.ok) {
         const successMessage = await response.text();
         console.log(successMessage);
-        onTaskDelete();
+        onTaskAction();
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);
@@ -89,6 +89,7 @@ function TaskCard({ title, priority, taskId, onTaskDelete }) {
         console.log(successMessage);
         setShowMoveOptions(false);
         setShowOptions(false); // Hide all options after moving
+        onTaskAction();
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);
