@@ -7,7 +7,7 @@ import "./TasksBoard.css";
 
 import "./TasksBoard.css";
 
-function TaskCard({ title, priority }) {
+function TaskCard({ title, priority, taskId }) {
 
   const { token } = userStore();
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
@@ -25,13 +25,7 @@ function TaskCard({ title, priority }) {
     priorityClass = "high-priority";
   }
 
-  const handleChange = (event) => {
-    const { value } = event.target;
-    taskStore.getState().setTaskId(value); // Update taskId in the taskStore
-  }
-
   const handleRemove = async () => {
-    const taskId = taskStore.getState().taskId; 
     try {
       // Send HTTP request to update task deleted boolean
       const response = await fetch(
@@ -40,8 +34,8 @@ function TaskCard({ title, priority }) {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            token: token,
-            taskId: taskId,
+            "token": token,
+            "taskId": taskId,
           },
         }
       );
@@ -62,7 +56,7 @@ function TaskCard({ title, priority }) {
   };
 
   const handleMove = async () => {
-    const taskId = taskStore.getState().taskId; 
+  
     if (!selectedColumn) {
       // Check if a column is selected
       alert("Please select a column.");
@@ -109,6 +103,7 @@ function TaskCard({ title, priority }) {
   };
 
   const handleConsult = () => {
+    taskStore.getState().setTaskId(taskId); // Update taskId in the taskStore
     navigate('../Task');
     setShowOptions(false); // Close the options menu
   };
@@ -128,10 +123,9 @@ function TaskCard({ title, priority }) {
             <option value="DOING">DOING</option>
             <option value="DONE">DONE</option>
           </select>
-          <button onClick={handleMove}>Move</button>
-          <button onClick={handleConsult}>Consult</button>
-          <button onClick={handleRemove}>Remove</button>
-          <input type="text" value={taskStore.getState().taskId} onChange={handleChange} />
+          <button onClick={() => handleMove(taskId)}>Move</button>
+          <button onClick={() => handleConsult(taskId)}>Consult</button>
+          <button onClick={() => handleRemove(taskId)}>Remove</button>
         </>
       )}
     </div>
