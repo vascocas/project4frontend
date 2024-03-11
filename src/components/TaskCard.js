@@ -27,6 +27,8 @@ function TaskCard({ title, priority, taskId }) {
 
   const handleRemove = async () => {
     try {
+      console.log("Token:", token);
+    console.log("Task ID:", taskId);
       // Send HTTP request to update task deleted boolean
       const response = await fetch(
         "http://localhost:8080/project4vc/rest/tasks/updateDeleted",

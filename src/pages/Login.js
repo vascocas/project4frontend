@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
-
 import "./Login.css";
 
 function Login() {
@@ -78,7 +77,7 @@ function Login() {
                     
                     <br /><br />
 
-                    <p>If you're not registered yet, register before logging in.</p>
+                    <p>If you're not registered yet, register before logging in.</p>                    
                 </form>
             </div>
         </div>

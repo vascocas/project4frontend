@@ -20,8 +20,17 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-    text-align: center; /* Add this line */
+    text-align: center;
+
+}
+
+  #login-page-wrap.page-wrap {
+    width: max-content;    
+    align-items: center; 
+    justify-content: center;
   }
+  
+
 
 /* Add margin-bottom to the input field for password */
 .input-fields label:nth-child(2) input {
