@@ -108,8 +108,8 @@ function TaskCard({ title, priority, taskId, state, onTaskAction }) {
 
   const handleConsult = () => {
     taskStore.getState().setTaskId(taskId);
-    navigate("../Task");
     setShowOptions(false);
+    navigate("../Task");
   };
 
   return (

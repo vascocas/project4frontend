@@ -9,21 +9,16 @@ import "../index.css";
 
 function Task() {
   const { token } = userStore();
-  const [task, setTask] = useState(null); // State to store the task details
-  const [categories] = useState([]);
+  const [task, setTask] = useState(null);
+  const { categories, taskId } = taskStore();
   const navigate = useNavigate();
 
-  // Accessing taskId from taskStore
-  const { taskId } = taskStore((state) => ({
-    taskId: state.taskId,
-  }));
-
   useEffect(() => {
-    if (token && taskId) {
-      const fetchTask = async () => {
-        try {
+    const fetchTask = async () => {
+      try {
+        if (token && taskId) {
           const response = await fetch(
-            `http://localhost:8080/project4vc/rest/tasks/${taskId}`, // Fetch task details using task ID
+            `http://localhost:8080/project4vc/rest/tasks/${taskId}`,
             {
               method: "GET",
               headers: {
@@ -38,14 +33,15 @@ function Task() {
           } else {
             console.error("Failed to fetch task:", response.statusText);
           }
-        } catch (error) {
-          console.error("Error fetching task:", error);
         }
-      };
-
-      fetchTask();
-    }
-  }, [token, taskId]);
+      } catch (error) {
+        console.error("Error fetching task:", error);
+      }
+    };
+    // Call fetchTask once when the component mounts
+    fetchTask();
+  }, [token, taskId, categories]);
+  
 
   // Function to handle updating task details
   const handleUpdateTask = async () => {
@@ -57,7 +53,7 @@ function Task() {
   };
 
   if (!task || categories.length === 0) {
-    return <div>Loading...</div>; // Display loading message while fetching task details and categories
+    return <div>Trouble while loading information...</div>;
   }
 
   return (
@@ -99,7 +95,7 @@ function Task() {
           onChange={(e) => setTask({ ...task, endDate: e.target.value })}
         />
         <label htmlFor="priority">Priority</label>
-        <select
+        <select className="dropdown-editTask"
           id="dropdown-task-priority"
           value={task.priority}
           onChange={(e) => setTask({ ...task, priority: e.target.value })}
@@ -109,7 +105,7 @@ function Task() {
           <option value="HIGH_PRIORITY">High</option>
         </select>
         <label htmlFor="category">Category</label>
-        <select
+        <select className="dropdown-editTask"
           id="dropdown-task-category"
           value={task.category}
           onChange={(e) => setTask({ ...task, category: e.target.value })}

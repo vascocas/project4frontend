@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { userStore } from "../stores/UserStore";
+import { taskStore } from "../stores/TaskStore";
 import "./AddTaskForm.css";
 
 function AddTaskForm() {
   const { token } = userStore();
-  const [categories, setCategories] = useState([]);
+  const {categories, setCategories } = taskStore();
   const [priority, setPriority] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -13,7 +14,7 @@ function AddTaskForm() {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    if (token) {
+    if (token) {    
       const fetchCategories = async () => {
         try {
           const response = await fetch(
