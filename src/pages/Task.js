@@ -1,98 +1,131 @@
 import React, { useState, useEffect } from "react";
-import '../index.css';
 import Header from "../components/Header";
-import Sidebar from '../components/navbar/Sidebar';
+import Sidebar from "../components/navbar/Sidebar";
 import { userStore } from "../stores/UserStore";
+import { taskStore } from "../stores/TaskStore";
+import { useNavigate } from "react-router-dom";
+import "./Task.css";
+import "../index.css";
 
-function Activity() {
-    const { username } = userStore();
-    const [activities, setActivities] = useState([]);
-    const [inputs, setInputs] = useState({});
-    const [newactivity, setNewActivity] = useState({});
+function Task() {
+  const { token } = userStore();
+  const [task, setTask] = useState(null); // State to store the task details
+  const [categories] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/my_activities_backend/rest/activity/all', {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'token': 'coi9bA0gEPiqqUN-9FYdilCGNLnvBQo0'
-                    }
-                });
+  // Accessing taskId from taskStore
+  const { taskId } = taskStore((state) => ({
+    taskId: state.taskId,
+  }));
 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-
-                const data = await response.json();
-                setActivities(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                // Optionally handle error state or display an error message
+  useEffect(() => {
+    if (token && taskId) {
+      const fetchTask = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/project4vc/rest/tasks/${taskId}`, // Fetch task details using task ID
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                token: token,
+              },
             }
-        };
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setTask(data);
+          } else {
+            console.error("Failed to fetch task:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error fetching task:", error);
+        }
+      };
 
-        fetchData();
-    }, [newactivity]); // Empty dependency array ensures the effect runs only once
+      fetchTask();
+    }
+  }, [token, taskId]);
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setInputs(values => ({ ...values, [name]: value }));
-    };
+  // Function to handle updating task details
+  const handleUpdateTask = async () => {
+    try {
+      // Implement your update task logic here, similar to AddTaskForm's handleAddTask
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+  if (!task || categories.length === 0) {
+    return <div>Loading...</div>; // Display loading message while fetching task details and categories
+  }
 
-        fetch('http://localhost:8080/my_activities_backend/rest/activity/add', {
-            method: 'POST',
-            headers: {
-                'Accept': '*/*',
-                'Content-Type': 'application/json',
-                'token': 'coi9bA0gEPiqqUN-9FYdilCGNLnvBQo0'
-            },
-            body: JSON.stringify(inputs)
-        })
-        .then(function (response) {
-            if (response.status === 200) {
-                setNewActivity(inputs);
-            } else {
-                alert('Something went wrong :(');
-            }
-        });
-    };
-
-    return (
-        <div className="Activity" id="activity-outer-container">
-            <Header />
-            <Sidebar pageWrapId={'activity-page-wrap'} outerContainerId={'activity-outer-container'} />
-            <div className="page-wrap" id="activity-page-wrap">
-              <h1>Add a New Task</h1>
-                <div>
-                    <form onSubmit={handleSubmit}>
-                        <label>Activity Title:
-                            <input
-                                type="text"
-                                name="title"
-                                defaultValue=""
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>Activity Description:
-                            <input
-                                type="text"
-                                name="description"
-                                defaultValue=""
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <input type="submit" value="Add" />
-                    </form>
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <div className="Task" id="task-outer-container">
+      <Header />
+      <Sidebar
+        pageWrapId={"task-page-wrap"}
+        outerContainerId={"task-outer-container"}
+      />
+      <div className="task-details">
+        <h2>Task Details</h2>
+        <label htmlFor="taskName">Title</label>
+        <input
+          type="text"
+          id="taskName"
+          placeholder="Insert title"
+          value={task.title}
+          onChange={(e) => setTask({ ...task, title: e.target.value })}
+        />
+        <label htmlFor="taskDescription">Description</label>
+        <textarea
+          id="taskDescription"
+          placeholder="Insert description"
+          value={task.description}
+          onChange={(e) => setTask({ ...task, description: e.target.value })}
+        ></textarea>
+        <label htmlFor="startDate">Start date</label>
+        <input
+          type="date"
+          id="startDate"
+          value={task.startDate}
+          onChange={(e) => setTask({ ...task, startDate: e.target.value })}
+        />
+        <label htmlFor="endDate">End date</label>
+        <input
+          type="date"
+          id="endDate"
+          value={task.endDate}
+          onChange={(e) => setTask({ ...task, endDate: e.target.value })}
+        />
+        <label htmlFor="priority">Priority</label>
+        <select
+          id="dropdown-task-priority"
+          value={task.priority}
+          onChange={(e) => setTask({ ...task, priority: e.target.value })}
+        >
+          <option value="LOW_PRIORITY">Low</option>
+          <option value="MEDIUM_PRIORITY">Medium</option>
+          <option value="HIGH_PRIORITY">High</option>
+        </select>
+        <label htmlFor="category">Category</label>
+        <select
+          id="dropdown-task-category"
+          value={task.category}
+          onChange={(e) => setTask({ ...task, category: e.target.value })}
+        >
+          <option value="">Select category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.name}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+        <button onClick={handleUpdateTask}>Update Task</button>
+        <button onClick={() => navigate("/Home")}>Go Back to Home</button>
+      </div>
+    </div>
+  );
 }
 
-export default Activity;
+export default Task;

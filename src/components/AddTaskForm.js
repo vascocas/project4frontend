@@ -39,7 +39,7 @@ function AddTaskForm() {
   
       fetchCategories();
     }
-  }, [token]);  
+  }, [token, setCategories]);  
 
   const handlePriorityChange = (event) => {
     setPriority(event.target.value);

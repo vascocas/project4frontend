@@ -6,9 +6,11 @@ export const taskStore = create(
   persist(
     (set) => ({
       taskId: null,
-      taskUpdated: false, // New state variable to track task updates
       setTaskId: (taskId) => set({ taskId }),
+      taskUpdated: false, // New state variable to track task updates
       setTaskUpdated: (taskUpdated) => set({ taskUpdated }), // Function to update taskUpdated state
+      categories: [], // Array to store categories
+      setCategories: (categories) => set({ categories }), // Function to update categories
     }),
     {
       name: "myTaskStore",
