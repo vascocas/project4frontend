@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { userStore } from "../stores/UserStore";
 import { taskStore } from "../stores/TaskStore";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./TasksBoard.css";
 
 function TaskCard({ title, priority, taskId, state, onTaskAction }) {
-
   const { token } = userStore();
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
   const [showMoveOptions, setShowMoveOptions] = useState(false); // State variable for visibility of move options
   const [selectedColumn, setSelectedColumn] = useState(""); // State variable for selected column
 
   const navigate = useNavigate();
-
 
   let priorityClass = "";
   if (priority === "LOW_PRIORITY") {
@@ -24,7 +22,7 @@ function TaskCard({ title, priority, taskId, state, onTaskAction }) {
   }
 
   const handleRemove = async () => {
-    const confirmation = window.confirm("Are you sure you want to delete this task?");
+    const confirmation = window.confirm("Confirm delete task?");
     if (!confirmation) {
       return; // User cancelled the operation
     }
@@ -36,8 +34,8 @@ function TaskCard({ title, priority, taskId, state, onTaskAction }) {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            "token": token,
-            "taskId": taskId,
+            token: token,
+            taskId: taskId,
           },
         }
       );
@@ -107,15 +105,19 @@ function TaskCard({ title, priority, taskId, state, onTaskAction }) {
       console.error("Error:", error);
     }
   };
-  
+
   const handleConsult = () => {
     taskStore.getState().setTaskId(taskId);
-    navigate('../Task');
+    navigate("../Task");
     setShowOptions(false);
   };
 
   return (
-    <div className={`task-card ${priorityClass}`} onClick={() => setShowOptions(!showOptions)}>
+    <div
+      className={`task-card ${priorityClass}`}
+      onMouseEnter={() => setShowOptions(true)}
+      onMouseLeave={() => setShowOptions(false)}
+    >
       <div className="card-header">{title}</div>
       <div className="task-options">
         {showOptions && !showMoveOptions && (
@@ -127,10 +129,7 @@ function TaskCard({ title, priority, taskId, state, onTaskAction }) {
         )}
         {showMoveOptions && (
           <>
-            <select
-              value={selectedColumn}
-              onChange={handleDropdownChange}
-            >
+            <select value={selectedColumn} onChange={handleDropdownChange}>
               <option value="">Select a column</option>
               <option value="TODO">TO DO</option>
               <option value="DOING">DOING</option>

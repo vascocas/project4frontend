@@ -13,31 +13,33 @@ function AddTaskForm() {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:8080/project4vc/rest/tasks/categories",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              token: token,
-            },
+    if (token) {
+      const fetchCategories = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:8080/project4vc/rest/tasks/categories",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                token: token,
+              },
+            }
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setCategories(data);
+          } else {
+            console.error("Failed to fetch categories:", response.statusText);
           }
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setCategories(data);
-        } else {
-          console.error("Failed to fetch categories:", response.statusText);
+        } catch (error) {
+          console.error("Error fetching categories:", error);
         }
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchCategories();
-  }, [token]);
+      };
+  
+      fetchCategories();
+    }
+  }, [token]);  
 
   const handlePriorityChange = (event) => {
     setPriority(event.target.value);
@@ -45,20 +47,17 @@ function AddTaskForm() {
 
   const handleAddTask = async () => {
     try {
-      console.log("Title:", title);
-      console.log("Description:", description);
-      console.log("Priority:", priority);
-      console.log("Start Date:", startDate);
-      console.log("End Date:", endDate);
-      console.log("Category:", category);
-
+      // Check if priority is empty
+      if (!priority) {
+        alert("No priority selected");
+      }
       const requestBody = JSON.stringify({
-        "title": title,
-        "description": description,
-        "priority": priority,
-        "startDate": startDate,
-        "endDate": endDate,
-        "category": category,
+        title: title,
+        description: description,
+        priority: priority,
+        startDate: startDate,
+        endDate: endDate,
+        category: category,
       });
 
       const response = await fetch(
@@ -76,7 +75,6 @@ function AddTaskForm() {
       if (response.ok) {
         const successMessage = await response.text();
         console.log(successMessage);
-        
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);
@@ -133,15 +131,21 @@ function AddTaskForm() {
           <select
             id="dropdown-task-priority"
             value={priority}
-            onChange={handlePriorityChange}>
+            onChange={handlePriorityChange}
+          >
             <option value="">Select priority</option>
             <option value="LOW_PRIORITY">Low</option>
             <option value="MEDIUM_PRIORITY">Medium</option>
             <option value="HIGH_PRIORITY">High</option>
           </select>
-          </div>
-          <div className="dropdown-category">
-          <label className="labels-task-category" htmlFor="dropdown-task-categories">Category</label>
+        </div>
+        <div className="dropdown-category">
+          <label
+            className="labels-task-category"
+            htmlFor="dropdown-task-categories"
+          >
+            Category
+          </label>
           <select
             name="task-categories"
             id="dropdown-task-categories"
@@ -150,14 +154,16 @@ function AddTaskForm() {
           >
             <option value="">Select category</option>
             {categories.map((category) => (
-              <option key={category.id} value={category.id}>
+              <option key={category.id} value={category.name}>
                 {category.name}
               </option>
             ))}
           </select>
           <div className="add-button">
-          <button id="addTask" onClick={handleAddTask}>Add task</button>
-          <p id="warningMessage2"></p>
+            <button id="addTask" onClick={handleAddTask}>
+              Add task
+            </button>
+            <p id="warningMessage2"></p>
           </div>
         </div>
       </div>
