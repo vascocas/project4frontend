@@ -1,11 +1,13 @@
-import React from 'react';
-import './Header.css';
-import { useNavigate } from 'react-router-dom';
+// Header.js
+import React from "react";
+import "./Header.css";
+import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
 
 const Header = () => {
-  const { username, token, updateName, updateToken } = userStore();
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const { username, token, photo, updateUsername, updateToken, updatePhoto, setIsLoginPage } =
+    userStore();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -24,9 +26,11 @@ const Header = () => {
         throw new Error("Logout failed");
       }
 
-      updateName(""); // Clear username
+      updateUsername(""); // Clear username
       updateToken(""); // Clear token
-      navigate('/login'); // Redirect to the Login page after successful logout
+      updatePhoto(""); // Clear photo
+      setIsLoginPage(true); 
+      navigate("/"); // Redirect to the root URL after successful logout
     } catch (error) {
       console.error("Error logging out:", error);
       alert("Logout failed. Please try again.");
@@ -36,8 +40,13 @@ const Header = () => {
   return (
     <header>
       <div className="header-right">
-        <div className="welcome-message">Welcome, <span className="user-name">{username}</span></div>
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
+        <div className="welcome-message">
+          Welcome, <span className="user-name">{username}</span>
+        </div>
+        {photo && <img className="user-photo" src={photo} alt="Profile" />}
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </header>
   );

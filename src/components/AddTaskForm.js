@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { userStore } from "../stores/UserStore";
 import "./AddTaskForm.css";
 
-function AddTaskForm(onTaskAction) {
+function AddTaskForm() {
   const { token } = userStore();
   const [categories, setCategories] = useState([]);
   const [priority, setPriority] = useState("");
@@ -45,6 +45,13 @@ function AddTaskForm(onTaskAction) {
 
   const handleAddTask = async () => {
     try {
+      console.log("Title:", title);
+      console.log("Description:", description);
+      console.log("Priority:", priority);
+      console.log("Start Date:", startDate);
+      console.log("End Date:", endDate);
+      console.log("Category:", category);
+
       const requestBody = JSON.stringify({
         "title": title,
         "description": description,
@@ -69,7 +76,7 @@ function AddTaskForm(onTaskAction) {
       if (response.ok) {
         const successMessage = await response.text();
         console.log(successMessage);
-        onTaskAction();
+        
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);

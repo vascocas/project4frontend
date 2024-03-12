@@ -6,8 +6,14 @@ export const userStore = create(
     (set) => ({
       username: "",
       token: "",
-      updateName: (username) => set({ username }),
+      role: "",
+      photo: "", 
+      isLoginPage: true,
+      updateUsername: (username) => set({ username }),
       updateToken: (token) => set({ token }),
+      updateRole: (role) => set({ role }),
+      updatePhoto: (photo) => set({ photo }),
+      setIsLoginPage: (value) => set({ isLoginPage: value }),
     }),
     {
       name: "mystore",
