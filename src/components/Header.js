@@ -37,10 +37,14 @@ const Header = () => {
     }
   };
 
+  const navigateToProfile = () => {
+    navigate("../Profile");
+  };
+
   return (
     <header>
       <div className="header-right">
-        <div className="welcome-message">
+      <div className="welcome-message" onClick={navigateToProfile}>
           Welcome, <span className="user-name">{username}</span>
         </div>
         {photo && <img className="user-photo" src={photo} alt="Profile" />}

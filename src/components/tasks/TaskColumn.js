@@ -2,13 +2,8 @@ import React from 'react';
 import TaskCard from './TaskCard';
 import "./TasksBoard.css";
 
-function TaskColumn({ title, tasks, onTaskAction }) {
-   // Define a function to handle task deletion
-   const handleTaskAction = () => {
-    if (typeof onTaskAction === 'function') {
-      onTaskAction(); // Call onTaskAction function if it exists
-    }
-  };
+function TaskColumn({ title, tasks }) {
+ 
 
   return (
     <div className="task-column">
@@ -16,7 +11,7 @@ function TaskColumn({ title, tasks, onTaskAction }) {
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            <TaskCard title={task.title} priority={task.priority} taskId={task.id} state={task.state} onTaskAction={handleTaskAction} />
+            <TaskCard title={task.title} priority={task.priority} taskId={task.id} state={task.state} />
           </li>
         ))}
       </ul>

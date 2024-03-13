@@ -10,7 +10,7 @@ import "../index.css";
 function Task() {
   const { token } = userStore();
   const [task, setTask] = useState(null);
-  const { categories, taskId } = taskStore();
+  const { categories, taskId, updateTask } = taskStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,7 +46,29 @@ function Task() {
   // Function to handle updating task details
   const handleUpdateTask = async () => {
     try {
-      // Implement your update task logic here, similar to AddTaskForm's handleAddTask
+      const requestBody = JSON.stringify(task);
+      const response = await fetch(
+        "http://localhost:8080/project4vc/rest/tasks/update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            token: token,
+          },
+          body: requestBody,
+        }
+      );
+
+      if (response.ok) {
+        const updatedTask = await response.json();
+        updateTask(updatedTask);
+        const successMessage = await response.text();
+        console.log(successMessage);
+        navigate("/Home");
+      } else {
+        const errorMessage = await response.text();
+        console.error(errorMessage);
+      }
     } catch (error) {
       console.error("Error updating task:", error);
     }

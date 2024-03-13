@@ -5,7 +5,7 @@ import "./AddTaskForm.css";
 
 function AddTaskForm() {
   const { token } = userStore();
-  const {categories, setCategories } = taskStore();
+  const {categories, setCategories, addTask  } = taskStore();
   const [priority, setPriority] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -74,6 +74,8 @@ function AddTaskForm() {
       );
 
       if (response.ok) {
+        const newTask = await response.json();
+        addTask(newTask); 
         const successMessage = await response.text();
         console.log(successMessage);
       } else {

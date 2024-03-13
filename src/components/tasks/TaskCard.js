@@ -4,11 +4,12 @@ import { taskStore } from "../../stores/TaskStore";
 import { useNavigate } from "react-router-dom";
 import "./TasksBoard.css";
 
-function TaskCard({ title, priority, taskId, state, onTaskAction }) {
+function TaskCard({ title, priority, taskId, state }) {
   const { token } = userStore();
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
   const [showMoveOptions, setShowMoveOptions] = useState(false); // State variable for visibility of move options
   const [selectedColumn, setSelectedColumn] = useState(""); // State variable for selected column
+  const { deleteTask, updateTask } = taskStore(); 
 
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ function TaskCard({ title, priority, taskId, state, onTaskAction }) {
       if (response.ok) {
         const successMessage = await response.text();
         console.log(successMessage);
-        onTaskAction();
+        deleteTask(taskId);
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);
@@ -96,7 +97,7 @@ function TaskCard({ title, priority, taskId, state, onTaskAction }) {
         console.log(successMessage);
         setShowMoveOptions(false);
         setShowOptions(false); // Hide all options after moving
-        onTaskAction();
+        updateTask({ id: taskId, state: selectedColumn });
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);

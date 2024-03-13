@@ -16,7 +16,7 @@ import RecycleBin from './pages/RecycleBin'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  
   <Router>
     <Routes>
       <Route index element={<App />} />
@@ -29,5 +29,5 @@ root.render(
       <Route path="/recycle" element={<RecycleBin />} />
     </Routes>
   </Router>
-  </React.StrictMode>
+  
 );

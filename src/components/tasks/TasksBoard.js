@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { userStore } from "../../stores/UserStore";
+import { taskStore } from "../../stores/TaskStore";
 import { compareTasks } from "./TaskUtils";
 import TaskColumn from "./TaskColumn";
 import "./TasksBoard.css";
 
 function TasksBoard() {
   const { token } = userStore();
-  const [tasks, setTasks] = useState([]);
+  const { tasks, setTasks } = taskStore();
 
   // Define fetchTasks function
   const fetchTasks = async () => {
@@ -40,34 +41,27 @@ function TasksBoard() {
     if (token) {
       fetchTasks();
     }
-  }, [token]); 
+  }, [token, tasks]);
 
   // Function to sort tasks by priority, start date, and end date
   function sortTasks(tasks) {
     return tasks.slice().sort(compareTasks); // Use slice() to avoid mutating original tasks array
   }
 
-    // Function to fetch tasks again after task action
-    const handleTaskAction  = () => {
-      fetchTasks();
-    };
-
+ 
   return (
     <div className="task-columns">
       <TaskColumn
         title="TODO"
         tasks={tasks.filter((task) => task.state === "TODO")}
-        onTaskAction={handleTaskAction}
       />
       <TaskColumn
         title="DOING"
         tasks={tasks.filter((task) => task.state === "DOING")}
-        onTaskAction={handleTaskAction}
       />
       <TaskColumn
         title="DONE"
         tasks={tasks.filter((task) => task.state === "DONE")}
-        onTaskAction={handleTaskAction}
       />
     </div>
   );

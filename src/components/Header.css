@@ -14,6 +14,7 @@ header {
     font-size: 20px; /* Adjust font size for the welcome message */
     font-weight: bold; /* Make the welcome message bold */
     margin-right: 20px; /* Add some space between the welcome message and logout button */
+    cursor: pointer;
   }
   
   .user-name {
@@ -32,5 +33,10 @@ header {
   
   .logout-button:hover {
     background-color: #0056b3; /* Change background color on hover for better visual feedback */
+  }
+  
+  .user-photo {
+    max-width: 100px;
+    max-height: 100px;
   }
   
