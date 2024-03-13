@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { userStore } from "../stores/UserStore";
-import { taskStore } from "../stores/TaskStore";
+import { userStore } from "../../stores/UserStore";
+import { taskStore } from "../../stores/TaskStore";
 import "./AddTaskForm.css";
 
 function AddTaskForm() {

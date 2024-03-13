@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
-import AddTaskForm from "../components/AddTaskForm";
-import TasksBoard from "../components/TasksBoard";
+import AddTaskForm from "../components/tasks/AddTaskForm";
+import TasksBoard from "../components/tasks/TasksBoard";
 import { userStore } from "../stores/UserStore";
 import "../index.css";
 import "./Home.css";

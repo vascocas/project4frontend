@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { userStore } from "../stores/UserStore";
-import { taskStore } from "../stores/TaskStore";
+import { userStore } from "../../stores/UserStore";
+import { taskStore } from "../../stores/TaskStore";
 import { useNavigate } from "react-router-dom";
 import "./TasksBoard.css";
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { userStore } from "../stores/UserStore";
+import { userStore } from "../../stores/UserStore";
 import { compareTasks } from "./TaskUtils";
 import TaskColumn from "./TaskColumn";
 import "./TasksBoard.css";
