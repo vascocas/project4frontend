@@ -5,12 +5,16 @@ import { userStore } from "../stores/UserStore";
 import { taskStore } from "../stores/TaskStore";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
+import "./Recycle+TaskCat.css";
 
 const TaskCategories = () => {
   const [categories, setCategories] = useState([]);
   const [newCategoryName, setNewCategoryName] = useState('');
   const [categoryIdToRemove, setCategoryIdToRemove] = useState('');
   const [editingCategory, setEditingCategory] = useState(null);
+  const [editedCategoryName, setEditedCategoryName] = useState(null); 
+  const { token } = userStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch categories when component mounts
@@ -20,13 +24,13 @@ const TaskCategories = () => {
   const fetchCategories = async () => {
     try {
       const response = await fetch(
-        'http://localhost:8080/project3-backend/rest/tasks/category/all',
+        'http://localhost:8080/project4vc/rest/tasks/categories',
         {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
-            token: sessionStorage.getItem('token'),
+            token: token,
           },
         }
       );
@@ -42,15 +46,16 @@ const TaskCategories = () => {
   };
 
   const handleEditCategory = async (categoryId, newName) => {
+    setEditedCategoryName(null);
     try {
       const response = await fetch(
-        `http://localhost:8080/project3-backend/rest/tasks/category/update`,
+        `http://localhost:8080/project4vc/rest/tasks/category`,
         {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
-            token: sessionStorage.getItem('token'),
+            token: token,
           },
           body: JSON.stringify({ id: categoryId, name: newName }),
         }
@@ -70,13 +75,13 @@ const TaskCategories = () => {
   const handleRemoveCategory = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/project3-backend/rest/tasks/category/remove`,
+        `http://localhost:8080/project4vc/rest/tasks/category`,
         {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
-            token: sessionStorage.getItem('token'),
+            token: token,
           },
           body: JSON.stringify({ id: categoryIdToRemove }),
         }
@@ -96,13 +101,13 @@ const TaskCategories = () => {
   const handleAddCategory = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/project3-backend/rest/tasks/category/add`,
+        `http://localhost:8080/project4vc/rest/tasks/category`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
-            token: sessionStorage.getItem('token'),
+            token: token,
           },
           body: JSON.stringify({ name: newCategoryName }),
         }
@@ -110,6 +115,7 @@ const TaskCategories = () => {
       if (response.ok) {
         alert('Category added successfully');
         fetchCategories();
+        setNewCategoryName('');
       } else {
         throw new Error(`Failed to add category: ${response.text()}`);
       }
@@ -119,9 +125,17 @@ const TaskCategories = () => {
     }
   };
 
-  const handleCategoryNameDoubleClick = (categoryId) => {
+  const handleCategoryNameDoubleClick = (categoryId, categoryName) => {
     setEditingCategory(categoryId);
+    setEditedCategoryName(categoryName);
   };
+
+  const handleSaveEdit = (categoryId, editedName) => {
+    handleEditCategory(categoryId, editedName);
+    setEditingCategory(null);
+  };
+
+  
 
   return (
     <div className="container" id="categories-outer-container">
@@ -130,16 +144,13 @@ const TaskCategories = () => {
         pageWrapId={"categories-page-wrap"}
         outerContainerId={"categories-outer-container"}
       />
-      <aside>
-        <button onClick={() => handleAddCategory()}>Add Category</button>
-        <button onClick={() => handleRemoveCategory()}>Remove Category</button>
-      </aside>
       <main>
         <table className="table-category-tasks">
           <thead className="table-header-category-tasks">
             <tr>
               <th className="table-header-category">Id</th>
               <th className="table-header-category">Name</th>
+              <th className="table-header-category">Actions</th> {/* New header column for actions */}
             </tr>
           </thead>
           <tbody>
@@ -153,21 +164,41 @@ const TaskCategories = () => {
                   {editingCategory === category.id ? (
                     <input
                       type="text"
-                      value={category.name}
-                      onChange={(e) => handleEditCategory(category.id, e.target.value)}
-                      onBlur={() => setEditingCategory(null)}
+                      value={editedCategoryName || category.name}
+                      onChange={(e) => setEditedCategoryName(e.target.value)}
+                      onBlur={() => handleSaveEdit(category.id, editedCategoryName)}
                     />
                   ) : (
                     category.name
                   )}
                 </td>
+                <td>
+                  <button onClick={handleRemoveCategory}>Remove Category</button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="save-category-container">
+        {editingCategory && ( // Only show Save button when editingCategory is not null
+    <button onClick={() => handleSaveEdit(editingCategory, editedCategoryName)}> Save</button> )}
+        </div>
+        <div className="input-category-container">
+        <input
+          type="text"
+          value={newCategoryName}
+          onChange={(e) => setNewCategoryName(e.target.value)}
+          placeholder="Enter category name"
+        />
+        <button onClick={handleAddCategory}>Add Category</button>
+      </div>
+      <div className="homeMenu-button-container">
+        <button onClick={() => navigate("/Home")}>Back to Scrum Board</button>
+      </div>
       </main>
     </div>
   );
 };
+
 
 export default TaskCategories;

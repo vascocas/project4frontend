@@ -1,0 +1,26 @@
+/* Define a class for centering the button */
+.homeMenu-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  height: 40px;
+}
+
+.save-category-container,
+.input-category-container {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.input-category-container input[type="text"],
+.input-category-container button {
+  height: 40px;
+  margin: 30px;
+}
+
+.save-category-container button {
+  height: 40px;
+  width: 100px;
+  margin: 10px;
+}

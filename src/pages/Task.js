@@ -118,7 +118,7 @@ function Task() {
           ))}
         </select>
         <button onClick={handleUpdateTask}>Update Task</button>
-        <button onClick={() => navigate("/Home")}>Go Back to Home</button>
+        <button onClick={() => navigate("/Home")}>Back to Scrum Board</button>
       </div>
     </div>
   );

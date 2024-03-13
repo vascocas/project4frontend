@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
 import { userStore } from "../stores/UserStore";
-import { taskStore } from "../stores/TaskStore";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
+import "./Recycle+TaskCat.css";
 
 const RecycleBin = () => {
   const [deletedTasks, setDeletedTasks] = useState([]);
   const { token } = userStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDeletedTasks = async () => {
@@ -98,20 +99,14 @@ const RecycleBin = () => {
         pageWrapId={"recycle-page-wrap"}
         outerContainerId={"recycle-outer-container"}
       />
-      <aside>
-        {deletedTasks.map((task) => (
-          <div key={task.id}>
-            <button onClick={() => restoreTask(task.id)}>Restore Task</button>
-            <button onClick={() => removeTask(task.id)}>Remove Task</button>
-          </div>
-        ))}
-      </aside>
       <main>
+      <h1 className="page-title">Recycle Bin</h1>
         <table className="table-recycle">
           <thead className="table-header-recycle">
             <tr>
               <th className="table-header-recycle">Id</th>
               <th className="table-header-recycle">Name</th>
+              <th className="table-header-recycle">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -119,10 +114,21 @@ const RecycleBin = () => {
               <tr key={task.id}>
                 <td>{task.id}</td>
                 <td>{task.title}</td>
+                <td>
+                  <button onClick={() => restoreTask(task.id)}>
+                    Restore Task
+                  </button>
+                  <button onClick={() => removeTask(task.id)}>
+                    Remove Task
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="homeMenu-button-container">
+          <button onClick={() => navigate("/Home")}>Back to Scrum Board</button>
+        </div>
       </main>
     </div>
   );
