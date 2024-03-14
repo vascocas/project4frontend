@@ -14,6 +14,9 @@ export const userStore = create(
       updateRole: (role) => set({ role }),
       updatePhoto: (photo) => set({ photo }),
       setIsLoginPage: (value) => set({ isLoginPage: value }),
+      deletedUsers: [],
+      setDeletedUsers: (newDeletedUsers) => set({ deletedUsers: newDeletedUsers }),
+      removeDeletedUser: (userId) => set((state) => ({ deletedUsers: state.deletedUsers.filter(user => user.id !== userId) })),
     }),
     {
       name: "mystore",

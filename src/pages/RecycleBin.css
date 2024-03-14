@@ -1,0 +1,50 @@
+/* RecycleBin.css */
+.homeMenu-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  height: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.recycle-content {
+  display: flex;
+  justify-content: center;
+}
+
+.recycle-column {
+  margin: 0 20px;
+  text-align: center;
+}
+
+.taskRecycle-container,
+.userRecycle-container {
+  margin-bottom: 20px;
+}
+
+.homeMenu-button-container {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #acaeb1;
+  color: white;
+  border: 2px solid white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

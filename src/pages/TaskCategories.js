@@ -5,7 +5,7 @@ import { userStore } from "../stores/UserStore";
 import { taskStore } from "../stores/TaskStore";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
-import "./Recycle+TaskCat.css";
+import "./TaskCategories.css";
 
 const TaskCategories = () => {
   const [categories, setCategories] = useState([]);
