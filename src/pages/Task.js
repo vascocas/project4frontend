@@ -46,7 +46,16 @@ function Task() {
   // Function to handle updating task details
   const handleUpdateTask = async () => {
     try {
-      const requestBody = JSON.stringify(task);
+      const taskData = {
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        startDate: task.startDate,
+        endDate: task.endDate,
+        priority: task.priority,
+        category: task.category
+      };
+      const requestBody = JSON.stringify(taskData);
       const response = await fetch(
         "http://localhost:8080/project4vc/rest/tasks/update",
         {
