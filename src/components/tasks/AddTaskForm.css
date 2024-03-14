@@ -45,3 +45,7 @@
     padding: 20px;
 }
 
+.button:hover {
+    background-color: #515355;
+    cursor: pointer;
+  }

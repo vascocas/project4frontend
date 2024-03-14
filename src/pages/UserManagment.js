@@ -7,23 +7,24 @@ import { useNavigate } from "react-router-dom";
 import "../index.css";
 
 const UserManagement = () => {
-  const [users, setUsers] = useState([]);
+  const { token, users, setUsers } = userStore();
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const deletedMapping = {
+    false: "Active",
+    true: "Deleted",
+  };
 
   const fetchUsers = async () => {
     try {
       const tokenValue = sessionStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:8080/project3-backend/rest/users/checkUsers",
+        "http://localhost:8080/project4vc/rest/users/users",
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             Accept: "*/*",
-            token: tokenValue,
+            token: token,
           },
         }
       );
@@ -39,16 +40,10 @@ const UserManagement = () => {
     }
   };
 
-  const roleMapping = {
-    100: "DEVELOPER",
-    200: "SCRUM_MASTER",
-    300: "PRODUCT_OWNER",
-  };
-
-  const deletedMapping = {
-    false: "Not deleted",
-    true: "Deleted",
-  };
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+  
 
   return (
         <div className="container" id="users-outer-container">
@@ -63,7 +58,7 @@ const UserManagement = () => {
             <th>ID</th>
             <th>Username</th>
             <th>Role</th>
-            <th>Deleted</th>
+            <th>State</th>
           </tr>
         </thead>
         <tbody>
@@ -71,8 +66,8 @@ const UserManagement = () => {
             <tr key={user.id}>
               <td>{user.id}</td>
               <td>{user.username}</td>
-              <td>{roleMapping[user.role] || "Unknown Role"}</td>
-              <td>{deletedMapping[user.deleted] || "Unknown"}</td>
+              <td>{user.role}</td>
+              <td>{deletedMapping[user.deleted]}</td>
             </tr>
           ))}
         </tbody>

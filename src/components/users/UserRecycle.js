@@ -77,7 +77,7 @@ const UserRecycle = () => {
             <td>{user.id}</td>
             <td>{user.name}</td>
             <td>
-              <button onClick={() => removeUser(user.id)}>Remove User</button>
+              <button className="recycle-button" onClick={() => removeUser(user.id)}>Remove User</button>
             </td>
           </tr>
         ))}

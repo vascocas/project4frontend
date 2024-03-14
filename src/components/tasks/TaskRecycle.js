@@ -103,8 +103,8 @@ const TaskRecycle = () => {
             <td>{task.id}</td>
             <td>{task.title}</td>
             <td>
-              <button onClick={() => restoreTask(task.id)}>Restore Task</button>
-              <button onClick={() => removeTask(task.id)}>Remove Task</button>
+              <button className="recycle-button" onClick={() => restoreTask(task.id)}>Restore Task</button>
+              <button className="recycle-button" onClick={() => removeTask(task.id)}>Remove Task</button>
             </td>
           </tr>
         ))}

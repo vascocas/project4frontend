@@ -24,3 +24,8 @@
   width: 100px;
   margin: 10px;
 }
+
+.button:hover {
+  background-color: #515355;
+  cursor: pointer;
+}

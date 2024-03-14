@@ -1,20 +1,16 @@
 /* RecycleBin.css */
-.homeMenu-button-container {
+
+.page-container {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  height: 40px;
+  flex-direction: column;
+  height: 100vh; /* Take the full viewport height */
 }
 
-.container {
+.content-container {
+  flex: 1; /* Expand to fill remaining space */
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.page-title {
-  font-size: 24px;
-  margin-bottom: 20px;
 }
 
 .recycle-content {
@@ -33,18 +29,17 @@
 }
 
 .homeMenu-button-container {
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #acaeb1;
-  color: white;
-  border: 2px solid white;
-  border-radius: 8px;
+.recycle-button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.recycle-button:hover {
+  background-color: #515355;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
 }

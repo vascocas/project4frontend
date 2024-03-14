@@ -123,9 +123,9 @@ function TaskCard({ title, priority, taskId, state }) {
       <div className="task-options">
         {showOptions && !showMoveOptions && (
           <>
-            <button onClick={handleMove}>Move</button>
-            <button onClick={handleConsult}>Consult</button>
-            <button onClick={handleRemove}>Remove</button>
+            <button className="tasks-button" onClick={handleMove}>Move</button>
+            <button className="tasks-button" onClick={handleConsult}>Consult</button>
+            <button className="tasks-button" onClick={handleRemove}>Remove</button>
           </>
         )}
         {showMoveOptions && (
@@ -136,7 +136,7 @@ function TaskCard({ title, priority, taskId, state }) {
               <option value="DOING">DOING</option>
               <option value="DONE">DONE</option>
             </select>
-            <button onClick={handleMoveConfirm}>Confirm Move</button>
+            <button className="tasks-button" onClick={handleMoveConfirm}>Confirm Move</button>
           </>
         )}
       </div>

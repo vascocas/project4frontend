@@ -13,13 +13,10 @@ const RecycleBin = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container" id="recycle-outer-container">
+    <div className="page-container">
       <Header />
-      <Sidebar
-        pageWrapId={"recycle-page-wrap"}
-        outerContainerId={"recycle-outer-container"}
-      />
-      <main>
+      <Sidebar />
+      <div className="content-container">
         <h1 className="page-title">Recycle Bin</h1>
         <div className="recycle-content">
           <div className="recycle-column">
@@ -36,9 +33,11 @@ const RecycleBin = () => {
           </div>
         </div>
         <div className="homeMenu-button-container">
-          <button onClick={() => navigate("/Home")}>Back to Scrum Board</button>
+          <button className="recycle-button" onClick={() => navigate("/Home")}>
+            Back to Scrum Board
+          </button>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
