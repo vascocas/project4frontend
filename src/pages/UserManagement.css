@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center items horizontally */
+}
+
+.page-title {
+  margin-bottom: 20px;
+}
+
+.header {
+  flex: 0;
+}
+
+.sidebar {
+  flex: 0;
+}
+
+.add-user-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.users-add-form {
+  flex: 1;
+  margin-right: 20px; /* Add some spacing between the elements */
+}
+
+.users-board {
+  flex: 3;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.users-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.homeMenu-button-container {
+  margin-top: 20px;
+}
+
+.users-button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.users-button:hover {
+  background-color: #515355;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
