@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
 import { userStore } from "../stores/UserStore";
-import { taskStore } from "../stores/TaskStore";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 import "./TaskCategories.css";
@@ -10,7 +9,6 @@ import "./TaskCategories.css";
 const TaskCategories = () => {
   const [categories, setCategories] = useState([]);
   const [newCategoryName, setNewCategoryName] = useState('');
-  const [categoryIdToRemove, setCategoryIdToRemove] = useState('');
   const [editingCategory, setEditingCategory] = useState(null);
   const [editedCategoryName, setEditedCategoryName] = useState(null); 
   const { token } = userStore();
@@ -72,7 +70,9 @@ const TaskCategories = () => {
     }
   };
 
-  const handleRemoveCategory = async () => {
+
+
+  const handleRemoveCategory = async (categoryId) => {
     try {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/tasks/category`,
@@ -83,7 +83,7 @@ const TaskCategories = () => {
             Accept: '*/*',
             token: token,
           },
-          body: JSON.stringify({ id: categoryIdToRemove }),
+          body: JSON.stringify({ id: categoryId }),
         }
       );
       if (response.ok) {
@@ -94,7 +94,7 @@ const TaskCategories = () => {
       }
     } catch (error) {
       console.error('Error removing category:', error);
-      alert('Error removing category');
+      alert('Category with associated tasks');
     }
   };
 
@@ -125,7 +125,7 @@ const TaskCategories = () => {
     }
   };
 
-  const handleCategoryNameDoubleClick = (categoryId, categoryName) => {
+  const handleEditCategoryName = (categoryId, categoryName) => {
     setEditingCategory(categoryId);
     setEditedCategoryName(categoryName);
   };
@@ -150,7 +150,7 @@ const TaskCategories = () => {
             <tr>
               <th className="table-header-category">Id</th>
               <th className="table-header-category">Name</th>
-              <th className="table-header-category">Actions</th> {/* New header column for actions */}
+              <th className="table-header-category">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -159,7 +159,7 @@ const TaskCategories = () => {
                 <td>{category.id}</td>
                 <td
                   className="clickable text-center"
-                  onDoubleClick={() => handleCategoryNameDoubleClick(category.id)}
+                  onDoubleClick={() => handleEditCategoryName(category.id, category.name)}
                 >
                   {editingCategory === category.id ? (
                     <input
@@ -173,15 +173,14 @@ const TaskCategories = () => {
                   )}
                 </td>
                 <td>
-                  <button onClick={handleRemoveCategory}>Remove Category</button>
+                  <button onClick={() => handleRemoveCategory(category.id)}>Remove Category</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="save-category-container">
-        {editingCategory && ( // Only show Save button when editingCategory is not null
-    <button onClick={() => handleSaveEdit(editingCategory, editedCategoryName)}> Save</button> )}
+        {editingCategory && (<button onClick={() => handleSaveEdit(editingCategory, editedCategoryName)}> Save</button> )}
         </div>
         <div className="input-category-container">
         <input

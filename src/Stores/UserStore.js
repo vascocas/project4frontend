@@ -17,7 +17,8 @@ export const userStore = create(
       setIsLoginPage: (value) => set({ isLoginPage: value }),
       deletedUsers: [],
       setDeletedUsers: (newDeletedUsers) => set({ deletedUsers: newDeletedUsers }),
-      removeDeletedUser: (userId) => set((state) => ({ deletedUsers: state.deletedUsers.filter(user => user.id !== userId) })),
+      removeDeletedUser: (userId) =>
+        set((state) => ({ deletedUsers: state.deletedUsers.filter(user => user.id !== userId) })),
       setUsers: (users) => set({ users }),
     }),
     {

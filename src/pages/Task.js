@@ -67,12 +67,10 @@ function Task() {
           body: requestBody,
         }
       );
-
       if (response.ok) {
         const updatedTask = await response.json();
         updateTask(updatedTask);
-        const successMessage = await response.text();
-        console.log(successMessage);
+        console.log("Task updated successfully");
         navigate("/Home");
       } else {
         const errorMessage = await response.text();
