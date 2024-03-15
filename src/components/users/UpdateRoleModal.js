@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../pages/UserManagement.css";
 
 const UpdateRoleModal = ({ show, onClose, onConfirm }) => {
   const [selectedRole, setSelectedRole] = useState("");
@@ -10,7 +11,7 @@ const UpdateRoleModal = ({ show, onClose, onConfirm }) => {
   };
 
   return (
-    <div className="modal">
+    <div className="modal-container">
       <div className="modal-content">
         <h2>Update User Role</h2>
         <select value={selectedRole} onChange={handleRoleChange}>
