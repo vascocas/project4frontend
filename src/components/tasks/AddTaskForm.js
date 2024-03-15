@@ -5,16 +5,17 @@ import "./AddTaskForm.css";
 
 function AddTaskForm() {
   const { token } = userStore();
-  const {categories, setCategories, addTask  } = taskStore();
+  const { categories, setCategories, addTask } = taskStore();
   const [priority, setPriority] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [category, setCategory] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (token) {    
+    if (token) {
       const fetchCategories = async () => {
         try {
           const response = await fetch(
@@ -37,10 +38,10 @@ function AddTaskForm() {
           console.error("Error fetching categories:", error);
         }
       };
-  
+
       fetchCategories();
     }
-  }, [token, setCategories]);  
+  }, [token, setCategories]);
 
   const handlePriorityChange = (event) => {
     setPriority(event.target.value);
@@ -48,9 +49,15 @@ function AddTaskForm() {
 
   const handleAddTask = async () => {
     try {
+      // Clear previous error message
+      setMessage("");
+      // Check if start and end dates are not empty
+      if (!startDate || !endDate) {
+        throw new Error("Please select start and end dates");
+      }
       // Check if priority is empty
       if (!priority) {
-        alert("No priority selected");
+        throw new Error("No priority selected");
       }
       const requestBody = JSON.stringify({
         title: title,
@@ -75,15 +82,20 @@ function AddTaskForm() {
 
       if (response.ok) {
         const newTask = await response.json();
-        addTask(newTask); 
-        const successMessage = await response.text();
-        console.log(successMessage);
+        addTask(newTask);
+        console.log("Task added successfully");
+        setTitle("");
+        setDescription("");
+        setPriority("");
+        setStartDate("");
+        setEndDate("");
+        setCategory("");
       } else {
         const errorMessage = await response.text();
-        console.error(errorMessage);
+        throw new Error(errorMessage);
       }
     } catch (error) {
-      console.error("Error:", error);
+      setMessage(error.message); // Set error message
     }
   };
 
@@ -166,7 +178,7 @@ function AddTaskForm() {
             <button id="addTask" onClick={handleAddTask}>
               Add task
             </button>
-            <p id="warningMessage2"></p>
+            <p id="warningMessage">{message}</p>
           </div>
         </div>
       </div>

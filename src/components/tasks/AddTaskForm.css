@@ -1,7 +1,7 @@
 /* CSS for AddTaskForm component */
 .add-task-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .labels-task-name,
@@ -9,43 +9,48 @@
 .labels-task-dates,
 .labels-task-priority,
 .labels-task-category {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .dropdown-priority,
 .dropdown-category {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .dropdown-category {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */    
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
 }
 
 #dropdown-task-priority,
 #dropdown-task-categories {
-    width: 140px;
+  width: 140px;
 }
 
-.labels-task-category { /* Adjust margin for Category label */
-    margin-top: 8px;
-    margin-bottom: 8px;
-    width: 140px;
+.labels-task-category {
+  /* Adjust margin for Category label */
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 140px;
 }
 
 #addTask {
-    width: 150px;
-    height: 40px;
-    margin-top: 16px; /* Add margin to the Add task button */
+  width: 150px;
+  height: 40px;
+  margin-top: 16px; /* Add margin to the Add task button */
 }
 
 .add-task-sidebar {
-    flex: 0 0 33%;
-    padding: 20px;
+  flex: 0 0 33%;
+  padding: 20px;
 }
 
 .button:hover {
-    background-color: #515355;
-    cursor: pointer;
-  }
+  background-color: #515355;
+  cursor: pointer;
+}
+
+#warningMessage {
+  color: red;
+}
