@@ -10,12 +10,23 @@ function AddUserForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
-  const [photo, setPhoto] = useState(""); // Optional
-  const [role, setRole] = useState(""); // Role selection
+  const [photo, setPhoto] = useState("");
+  const [role, setRole] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleAddUser = async () => {
     try {
-      // Validate form fields, ensure all required fields are filled
+      // Clear previous error message
+      setMessage("");
+      // Validate form fields
+      if (!username || !password || !email || !firstName || !lastName || !phone) {
+        setMessage("All fields are required");
+        return;
+      }
+      // Check if role is empty
+      if (!role) {
+        throw new Error("No role selected");
+      }
 
       const requestBody = JSON.stringify({
         username: username,
@@ -44,13 +55,22 @@ function AddUserForm() {
         setUsers([...users, newUser]);
         // Handle successful addition of user
         console.log("User added:", newUser);
+          // Clear input fields after successful addition
+          setUsername("");
+          setPassword("");
+          setEmail("");
+          setFirstName("");
+          setLastName("");
+          setPhone("");
+          setPhoto("");
+          setRole("");
       } else {
         // Handle error response
         const errorMessage = await response.text();
         console.error(errorMessage);
       }
     } catch (error) {
-      console.error("Error:", error);
+      setMessage(error.message); // Set error message
     }
   };
 
@@ -109,6 +129,7 @@ function AddUserForm() {
         <option value="PRODUCT_OWNER">Product Owner</option>
       </select>
       <button onClick={handleAddUser}>Add User</button>
+      <p id="warningMessage1">{message}</p>
     </div>
   );
 }

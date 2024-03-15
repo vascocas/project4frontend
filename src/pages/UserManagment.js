@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
 import AddUserForm from "../components/users/AddUserForm";
+import UpdateRoleModal from "../components/users/UpdateRoleModal";
 import { userStore } from "../stores/UserStore";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
@@ -11,7 +12,7 @@ const UserManagement = () => {
   const navigate = useNavigate();
   const { token, users, setUsers } = userStore();
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [roles, setRoles] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const deletedMapping = {
     false: "Active",
@@ -33,7 +34,6 @@ const UserManagement = () => {
       );
       if (response.ok) {
         const usersArray = await response.json();
-        console.log(usersArray);
         setUsers(usersArray);
       } else {
         setUsers([]);
@@ -42,7 +42,6 @@ const UserManagement = () => {
     } catch (error) {
       console.error("Error fetching users:", error);
       setUsers([]);
-      // Handle the error appropriately, e.g., display an error message to the user
     }
   };
 
@@ -51,6 +50,10 @@ const UserManagement = () => {
   }, [token, setUsers]);
 
   const removeUser = async (userId) => {
+    const confirmation = window.confirm("Delete user permanently?");
+    if (!confirmation) {
+      return; // User cancelled the operation
+    }
     try {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/users/${userId}`,
@@ -76,24 +79,18 @@ const UserManagement = () => {
 
   const handleUpdateRole = (userId) => {
     setSelectedUserId(userId); // Set the selected user ID
+    setShowModal(true); // Show the modal
   };
 
-  const handleRoleChange = (e, userId) => {
-    const updatedRoles = { ...roles }; // Create a copy of the roles state
-    updatedRoles[userId] = e.target.value; // Update the role for the specific user
-    setRoles(updatedRoles); // Update the roles state
-  };
-
-  const handleConfirmUpdateRole = async (userId) => {
-    const newRole = roles[userId]; // Get the role for the selected user
-    if (!newRole) {
+  const handleConfirmUpdateRole = async (newRole) => {
+      if (!newRole) {
       alert("Please select a role.");
       return;
     }
 
     try {
       const userData = {
-        id: userId,
+        id: selectedUserId,
         role: newRole,
       };
       const requestBody = JSON.stringify(userData);
@@ -111,7 +108,7 @@ const UserManagement = () => {
       );
       if (response.ok) {
         fetchUsers();
-        setSelectedUserId(null); // Reset selected user ID
+        setShowModal(false); // Close the modal
       } else {
         // Handle error
         alert("Failed to update user role.");
@@ -149,21 +146,7 @@ const UserManagement = () => {
                 <tr key={user.id}>
                   <td>{user.id}</td>
                   <td>{user.username}</td>
-                  <td>
-                    {selectedUserId === user.id ? (
-                      <select
-                        value={roles[user.id] || ""}
-                        onChange={(e) => handleRoleChange(e, user.id)}
-                      >
-                        <option value="">Select Role</option>
-                        <option value="DEVELOPER">DEVELOPER</option>
-                        <option value="SCRUM_MASTER">SCRUM_MASTER</option>
-                        <option value="PRODUCT_OWNER">PRODUCT_OWNER</option>
-                      </select>
-                    ) : (
-                      user.role
-                    )}
-                  </td>
+                  <td>{user.role}</td>
                   <td>{deletedMapping[user.deleted]}</td>
                   <td>
                     <div>
@@ -179,20 +162,17 @@ const UserManagement = () => {
                       >
                         Remove User
                       </button>
-                      {selectedUserId === user.id && (
-                        <button
-                          className="users-table-button"
-                          onClick={() => handleConfirmUpdateRole(user.id)}
-                        >
-                          Confirm
-                        </button>
-                      )}
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <UpdateRoleModal
+            show={showModal}
+            onClose={() => setShowModal(false)}
+            onConfirm={handleConfirmUpdateRole}
+          />
           <div className="homeMenu-button-container">
             <button className="users-button" onClick={() => navigate("/Home")}>
               Back to Scrum Board
