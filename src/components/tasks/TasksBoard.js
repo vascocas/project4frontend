@@ -11,6 +11,9 @@ function TasksBoard() {
 
   // Define fetchTasks function
   const fetchTasks = async () => {
+    if (!token) {
+      return; // If token is not present, exit the function early
+    }
     try {
       const response = await fetch(
         "http://localhost:8080/project4vc/rest/tasks/all",
