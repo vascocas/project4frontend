@@ -19,6 +19,8 @@ export const userStore = create(
       deletedUsers: [],
       setDeletedUsers: (newDeletedUsers) => set({ deletedUsers: newDeletedUsers }),
       removeDeletedUser: (userId) => set((state) => ({ deletedUsers: state.deletedUsers.filter(user => user.id !== userId) })),
+      usernames: [],
+      setUsernames: (usernames) => set({ usernames }),
     }),
     {
       name: "mystore",

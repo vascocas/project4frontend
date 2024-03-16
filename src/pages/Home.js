@@ -3,16 +3,13 @@ import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
 import AddTaskForm from "../components/tasks/AddTaskForm";
 import TasksBoard from "../components/tasks/TasksBoard";
-import { userStore } from "../stores/UserStore";
 import "../index.css";
 import "./Home.css";
 
 function Home() {
-  const { username } = userStore();
-
   return (
     <div className="Home" id="home-outer-container">
-      <Header user={username} />
+      <Header />
       <Sidebar
         pageWrapId={"home-page-wrap"}
         outerContainerId={"home-outer-container"}
