@@ -82,9 +82,11 @@ function TasksBoard() {
   return (
     <div>
       <div className="filters">
+      <h3 id="filtersTitle">Filters</h3>
         <TasksUserFilter onFilter={handleUserFilter} />
         <TasksCategoryFilter onFilter={handleCategoryFilter} />
-        <button onClick={fetchAllTasks}>Clear</button>
+        <button id="clearButton" onClick={fetchAllTasks}>Clear</button>
+
       </div>
       <div className="task-columns">
         <TaskColumn

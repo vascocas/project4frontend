@@ -50,15 +50,15 @@ const UserManagement = () => {
   }, [token, setUsers]);
 
   const removeUser = async (userId) => {
-    const confirmation = window.confirm("Delete user permanently?");
+    const confirmation = window.confirm("Confirm remove user?");
     if (!confirmation) {
       return; // User cancelled the operation
     }
     try {
       const response = await fetch(
-        `http://localhost:8080/project4vc/rest/users/${userId}`,
+        `http://localhost:8080/project4vc/rest/users/remove/${userId}`,
         {
-          method: "DELETE",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Accept: "*/*",

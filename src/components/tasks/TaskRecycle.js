@@ -38,6 +38,10 @@ const TaskRecycle = () => {
   }, [token, setDeletedTasks]);
 
   const restoreTask = async (taskId) => {
+    const confirmation = window.confirm("Confirm restore task?");
+    if (!confirmation) {
+      return; // User cancelled the operation
+    }
     try {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/tasks/restoreDeleted`,
@@ -64,6 +68,10 @@ const TaskRecycle = () => {
   };
 
   const removeTask = async (taskId) => {
+    const confirmation = window.confirm("Confirm remove task?");
+    if (!confirmation) {
+      return; // User cancelled the operation
+    }
     try {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/tasks/${taskId}`,
@@ -93,7 +101,7 @@ const TaskRecycle = () => {
       <thead className="table-header-recycle">
         <tr>
           <th className="table-header-recycle">Id</th>
-          <th className="table-header-recycle">Name</th>
+          <th className="table-header-recycle">Title</th>
           <th className="table-header-recycle">Actions</th>
         </tr>
       </thead>

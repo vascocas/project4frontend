@@ -21,8 +21,8 @@ const UserRecycle = () => {
           }
         );
         if (response.ok) {
-          const users = await response.json();
-          setDeletedUsers(users);
+          const arrayDeleted = await response.json();
+          setDeletedUsers(arrayDeleted);
         } else {
           throw new Error(
             `Failed to fetch deleted users: ${await response.text()}`
@@ -38,6 +38,11 @@ const UserRecycle = () => {
 
 
   const removeUser = async (userId) => {
+    const confirmation = window.confirm("Confirm delete user permanantly?");
+    if (!confirmation) {
+      return; // User cancelled the operation
+    }
+    console.log(token);
     try {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/users/${userId}`,
@@ -67,7 +72,7 @@ const UserRecycle = () => {
       <thead className="table-header-recycle">
         <tr>
           <th className="table-header-recycle">Id</th>
-          <th className="table-header-recycle">Name</th>
+          <th className="table-header-recycle">Username</th>
           <th className="table-header-recycle">Actions</th>
         </tr>
       </thead>
@@ -75,7 +80,7 @@ const UserRecycle = () => {
         {deletedUsers.map((user) => (
           <tr key={user.id}>
             <td>{user.id}</td>
-            <td>{user.name}</td>
+            <td>{user.username}</td>
             <td>
               <button className="recycle-button" onClick={() => removeUser(user.id)}>Remove User</button>
             </td>

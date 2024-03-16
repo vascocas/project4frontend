@@ -60,3 +60,12 @@
   border: 1px solid #dbdbdb;
   border-radius: 5px;
 }
+
+#filtersTitle {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#clearButton {
+  margin-top: 10px;
+}
