@@ -13,7 +13,7 @@ export const userStore = create(
       photo: "",
       updatePhoto: (photo) => set({ photo }),
       isLoginPage: true,
-      setIsLoginPage: (value) => set({ isLoginPage: value }),
+      setIsLoginPage: (value) => set((state) => ({ ...state, isLoginPage: value })),
       users: [],
       setUsers: (users) => set({ users }),
       deletedUsers: [],

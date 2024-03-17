@@ -1,23 +1,35 @@
+import React from 'react';
 import './App.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { userStore } from "./stores/UserStore";
 
 function App() {
-  const { isLoginPage, setIsLoginPage } = userStore(); // Retrieve isLoginPage from UserStore
+  const { isLoginPage, setIsLoginPage } = userStore();
 
-  const togglePage = () => {
-    setIsLoginPage((prevIsLoginPage) => !prevIsLoginPage); // Toggle the isLoginPage state
+  const goToLoginPage = () => {
+    setIsLoginPage(true);
   };
+
+  const goToRegisterPage = () => {
+    setIsLoginPage(false);
+  };
+
   
   return (
     <div className="App" id="outer-container">
       <div className="page-wrap" id="app-page-wrap">
         <h1>Welcome to Scrum Board</h1>
         {isLoginPage ? <Login /> : <Register />}
-        <button onClick={togglePage}>
-          {isLoginPage ? "Register" : "Login"}
-        </button>
+        {isLoginPage ? (
+          <button onClick={goToRegisterPage}>
+            Register
+          </button>
+        ) : (
+          <button onClick={goToLoginPage}>
+            Login
+          </button>
+        )}
       </div>
     </div>
   );
