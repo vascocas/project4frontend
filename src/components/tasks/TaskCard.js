@@ -9,7 +9,7 @@ function TaskCard({ title, priority, taskId, state }) {
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
   const [showMoveOptions, setShowMoveOptions] = useState(false); // State variable for visibility of move options
   const [selectedColumn, setSelectedColumn] = useState(""); // State variable for selected column
-  const { deleteTask, updateTask } = taskStore(); 
+  const { deleteTask, updateTask } = taskStore();
 
   const navigate = useNavigate();
 
@@ -95,8 +95,10 @@ function TaskCard({ title, priority, taskId, state }) {
       if (response.ok) {
         const successMessage = await response.text();
         console.log(successMessage);
+        // Hide all options after moving
         setShowMoveOptions(false);
-        setShowOptions(false); // Hide all options after moving
+        setShowOptions(false);
+        // Update task state
         updateTask({ id: taskId, state: selectedColumn });
       } else {
         const errorMessage = await response.text();
@@ -123,9 +125,15 @@ function TaskCard({ title, priority, taskId, state }) {
       <div className="task-options">
         {showOptions && !showMoveOptions && (
           <>
-            <button className="tasks-button" onClick={handleMove}>Move</button>
-            <button className="tasks-button" onClick={handleConsult}>Consult</button>
-            <button className="tasks-button" onClick={handleRemove}>Remove</button>
+            <button className="tasks-button" onClick={handleMove}>
+              Move
+            </button>
+            <button className="tasks-button" onClick={handleConsult}>
+              Consult
+            </button>
+            <button className="tasks-button" onClick={handleRemove}>
+              Remove
+            </button>
           </>
         )}
         {showMoveOptions && (
@@ -136,7 +144,9 @@ function TaskCard({ title, priority, taskId, state }) {
               <option value="DOING">DOING</option>
               <option value="DONE">DONE</option>
             </select>
-            <button className="tasks-button" onClick={handleMoveConfirm}>Confirm Move</button>
+            <button className="tasks-button" onClick={handleMoveConfirm}>
+              Confirm Move
+            </button>
           </>
         )}
       </div>

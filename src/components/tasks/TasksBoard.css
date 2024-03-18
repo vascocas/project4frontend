@@ -69,3 +69,12 @@
 #clearButton {
   margin-top: 10px;
 }
+.filters {
+  display: flex;
+}
+
+.filters-box,
+.remove-user-tasks {
+  flex: 1; /* Both divs will take up equal space */
+  margin-right: 10px; /* Add some spacing between the divs */
+}

@@ -5,6 +5,7 @@ import { compareTasks } from "./TaskUtils";
 import TaskColumn from "./TaskColumn";
 import TasksUserFilter from "./TasksUserFilter";
 import TasksCategoryFilter from "./TasksCategoryFilter";
+import RemoveUserTasks from "./RemoveUserTasks";
 import "./TasksBoard.css";
 
 function TasksBoard() {
@@ -20,7 +21,7 @@ function TasksBoard() {
     }
     try {
       let url = "http://localhost:8080/project4vc/rest/tasks/all";
-      if (filteredUserId ) {
+      if (filteredUserId) {
         url += `/user/${filteredUserId}`;
       } else if (filteredCategoryId) {
         url += `/category/${filteredCategoryId}`;
@@ -41,9 +42,9 @@ function TasksBoard() {
         setTasks(tasks);
       } else {
         const message = await response.text();
-        console.error("Failed to fetch tasks:", message);
+        console.error("Tasks array is empty:", message);
         setTasks([]);
-        alert(message);
+        alert("Tasks array is empty", message);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -55,7 +56,7 @@ function TasksBoard() {
     if (token) {
       fetchTasks();
     }
-  }, [token, filteredUserId, filteredCategoryId ]);
+  }, [token, filteredUserId, filteredCategoryId]);
 
   // Function to sort tasks by priority, start date, and end date
   function sortTasks(tasks) {
@@ -63,14 +64,14 @@ function TasksBoard() {
   }
 
   const handleUserFilter = (userId) => {
-    setFilteredUserId (userId);
+    setFilteredUserId(userId);
     setFilteredCategoryId(""); // Reset category filter
   };
 
   const handleCategoryFilter = (categoryId) => {
     console.log("User filter applied with user ID:", categoryId);
     setFilteredCategoryId(categoryId);
-    setFilteredUserId (""); // Reset user filter
+    setFilteredUserId(""); // Reset user filter
   };
 
   const fetchAllTasks = () => {
@@ -82,12 +83,20 @@ function TasksBoard() {
   return (
     <div>
       <div className="filters">
-      <h3 id="filtersTitle">Filters</h3>
-        <TasksUserFilter onFilter={handleUserFilter} />
-        <TasksCategoryFilter onFilter={handleCategoryFilter} />
-        <button id="clearButton" onClick={fetchAllTasks}>Clear</button>
-
+        <div className="filters-box">
+          <h3 id="filtersTitle">Filters</h3>
+          <TasksUserFilter onFilter={handleUserFilter} />
+          <TasksCategoryFilter onFilter={handleCategoryFilter} />
+          <button id="clearButton" onClick={fetchAllTasks}>
+            Clear
+          </button>
+        </div>
+        <div className="remove-user-tasks">
+        <h3 id="filtersTitle">Remove Tasks</h3>
+          <RemoveUserTasks fetchTasks={fetchTasks}/>
+        </div>
       </div>
+
       <div className="task-columns">
         <TaskColumn
           title="TODO"
