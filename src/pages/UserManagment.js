@@ -83,7 +83,7 @@ const UserManagement = () => {
   };
 
   const handleConfirmUpdateRole = async (newRole) => {
-      if (!newRole) {
+    if (!newRole) {
       alert("Please select a role.");
       return;
     }
@@ -119,18 +119,22 @@ const UserManagement = () => {
   };
 
   return (
-    <div className="container" id="users-outer-container">
+    <div className="task-categories-page">
       <Header />
       <Sidebar
-        pageWrapId={"users-page-wrap"}
-        outerContainerId={"users-outer-container"}
+        pageWrapId={"categories-page-wrap"}
+        outerContainerId={"task-categories-page"}
       />
-      <h1 className="page-title">User Management</h1>
       <div className="content">
-        <div className="users-add-form">
+        
+        <div className="add-user-column">
           <AddUserForm />
         </div>
         <div className="users-board">
+        <div className="content-title">
+          <h1 className="page-title">User Management</h1>
+        </div>
+          <h3>User List</h3>
           <table className="users-table">
             <thead>
               <tr>

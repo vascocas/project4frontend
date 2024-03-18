@@ -1,31 +1,67 @@
-/* Define a class for centering the button */
-.homeMenu-button-container {
+/* TaskCategories.css */
+
+.container {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  height: 40px;
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table-category-tasks {
+  margin: 20px;
+}
+
+.table-header-category-tasks {
+  background-color: #f0f0f0;
+}
+
+.table-header-category {
+  padding: 10px;
 }
 
 .save-category-container,
 .input-category-container {
-  justify-content: center;
   display: flex;
+  justify-content: center;
   align-items: center;
+  margin: 20px 0;
 }
 
 .input-category-container input[type="text"],
-.input-category-container button {
-  height: 40px;
-  margin: 30px;
-}
-
+.input-category-container button,
 .save-category-container button {
   height: 40px;
-  width: 100px;
-  margin: 10px;
+  margin: 0 10px; /* Adjust margin */
+  padding: 0 10px; /* Adjust padding */
 }
 
-.button:hover {
-  background-color: #515355;
+.homeMenu-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: auto; /* Align to the bottom */
+  margin-bottom: 20px; /* Add space below */
+}
+
+.homeMenu-button-container button {
   cursor: pointer;
+  padding: 10px 20px; /* Adjust padding */
+  background-color: #515355;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.homeMenu-button-container button:hover {
+  background-color: #333;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

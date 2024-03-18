@@ -1,103 +1,140 @@
-.container {
+/* UserManagement.css */
+
+.task-categories-page {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
+  height: 100%;
 }
 
-.content {
+.content-title {
   display: flex;
-  flex-direction: row;
-  align-items: center; /* Center items horizontally */
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .page-title {
   margin-bottom: 20px;
 }
 
-.header {
-  flex: 0;
-}
-
-.sidebar {
-  flex: 0;
-}
-
-.add-user-form {
+.content-container {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
 }
 
-.users-add-form {
+.add-user-column {
   flex: 1;
-  margin-right: 20px; /* Add some spacing between the elements */
 }
 
 .users-board {
-  flex: 3;
+  flex: 2;
+}
+.add-user-column {
+  margin-right: 20px; /* Add margin for spacing */
+}
+
+.add-user-column h2 {
+  text-align: center;
+}
+
+.users-board h3 {
+  text-align: center;
 }
 
 .users-table {
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
 }
 
 .users-table th,
 .users-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  padding: 10px;
+  border: 1px solid #ccc;
 }
 
 .users-table th {
-  background-color: #f2f2f2;
-  text-align: left;
+  background-color: #f0f0f0;
+}
+
+.users-table-button {
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #515355;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.users-table-button:hover {
+  background-color: #333;
 }
 
 .homeMenu-button-container {
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
 }
 
 .users-button {
-  padding: 10px 20px;
-  border: 1px solid #ddd;
   cursor: pointer;
+  padding: 10px 20px;
+  background-color: #515355;
+  color: #fff;
+  border: none;
   border-radius: 5px;
 }
 
 .users-button:hover {
-  background-color: #515355;
-  border: 1px solid #dbdbdb;
+  background-color: #333;
+}
+
+.add-user-form {
+  width: 300px; /* Adjust the width as needed */
+  padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.add-user-form h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.add-user-form button {
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.add-user-form input,
+.add-user-form select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.add-user-form button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.add-user-form button:hover {
+  background-color: #0056b3;
 }
 
 #warningMessage1 {
   color: red;
   text-align: center;
 }
-
-.modal-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.modal-buttons button {
-  margin-top: 10px;
-  margin-right: 30px;
-  height: 30px;
-}
-

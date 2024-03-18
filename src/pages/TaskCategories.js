@@ -8,9 +8,9 @@ import "./TaskCategories.css";
 
 const TaskCategories = () => {
   const [categories, setCategories] = useState([]);
-  const [newCategoryName, setNewCategoryName] = useState('');
+  const [newCategoryName, setNewCategoryName] = useState("");
   const [editingCategory, setEditingCategory] = useState(null);
-  const [editedCategoryName, setEditedCategoryName] = useState(null); 
+  const [editedCategoryName, setEditedCategoryName] = useState(null);
   const { token } = userStore();
   const navigate = useNavigate();
 
@@ -22,12 +22,12 @@ const TaskCategories = () => {
   const fetchCategories = async () => {
     try {
       const response = await fetch(
-        'http://localhost:8080/project4vc/rest/tasks/categories',
+        "http://localhost:8080/project4vc/rest/tasks/categories",
         {
-          method: 'GET',
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
-            Accept: '*/*',
+            "Content-Type": "application/json",
+            Accept: "*/*",
             token: token,
           },
         }
@@ -39,7 +39,7 @@ const TaskCategories = () => {
         throw new Error(`Failed to fetch categories: ${response.text()}`);
       }
     } catch (error) {
-      console.error('Error loading categories:', error);
+      console.error("Error loading categories:", error);
     }
   };
 
@@ -49,52 +49,50 @@ const TaskCategories = () => {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/tasks/category`,
         {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json',
-            Accept: '*/*',
+            "Content-Type": "application/json",
+            Accept: "*/*",
             token: token,
           },
           body: JSON.stringify({ id: categoryId, name: newName }),
         }
       );
       if (response.ok) {
-        alert('Category updated successfully');
+        alert("Category updated successfully");
         fetchCategories();
       } else {
         throw new Error(`Failed to update category: ${response.text()}`);
       }
     } catch (error) {
-      console.error('Error editing category:', error);
-      alert('Error editing category');
+      console.error("Error editing category:", error);
+      alert("Error editing category");
     }
   };
-
-
 
   const handleRemoveCategory = async (categoryId) => {
     try {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/tasks/category`,
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
-            'Content-Type': 'application/json',
-            Accept: '*/*',
+            "Content-Type": "application/json",
+            Accept: "*/*",
             token: token,
           },
           body: JSON.stringify({ id: categoryId }),
         }
       );
       if (response.ok) {
-        alert('Category removed successfully');
+        alert("Category removed successfully");
         fetchCategories();
       } else {
         throw new Error(`Failed to remove category: ${response.text()}`);
       }
     } catch (error) {
-      console.error('Error removing category:', error);
-      alert('Category with associated tasks');
+      console.error("Error removing category:", error);
+      alert("Category with associated tasks");
     }
   };
 
@@ -103,25 +101,25 @@ const TaskCategories = () => {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/tasks/category`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            Accept: '*/*',
+            "Content-Type": "application/json",
+            Accept: "*/*",
             token: token,
           },
           body: JSON.stringify({ name: newCategoryName }),
         }
       );
       if (response.ok) {
-        alert('Category added successfully');
+        alert("Category added successfully");
         fetchCategories();
-        setNewCategoryName('');
+        setNewCategoryName("");
       } else {
         throw new Error(`Failed to add category: ${response.text()}`);
       }
     } catch (error) {
-      console.error('Error adding category:', error);
-      alert('Error adding category');
+      console.error("Error adding category:", error);
+      alert("Error adding category");
     }
   };
 
@@ -135,69 +133,85 @@ const TaskCategories = () => {
     setEditingCategory(null);
   };
 
-  
-
   return (
-    <div className="container" id="categories-outer-container">
+    <div className="task-categories-page">
       <Header />
       <Sidebar
         pageWrapId={"categories-page-wrap"}
-        outerContainerId={"categories-outer-container"}
+        outerContainerId={"task-categories-page"}
       />
-      <main>
-        <table className="table-category-tasks">
-          <thead className="table-header-category-tasks">
-            <tr>
-              <th className="table-header-category">Id</th>
-              <th className="table-header-category">Name</th>
-              <th className="table-header-category">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((category) => (
-              <tr key={category.id}>
-                <td>{category.id}</td>
-                <td
-                  className="clickable text-center"
-                  onDoubleClick={() => handleEditCategoryName(category.id, category.name)}
-                >
-                  {editingCategory === category.id ? (
-                    <input
-                      type="text"
-                      value={editedCategoryName || category.name}
-                      onChange={(e) => setEditedCategoryName(e.target.value)}
-                      onBlur={() => handleSaveEdit(category.id, editedCategoryName)}
-                    />
-                  ) : (
-                    category.name
-                  )}
-                </td>
-                <td>
-                  <button onClick={() => handleRemoveCategory(category.id)}>Remove Category</button>
-                </td>
+      <div className="content">
+        <main id="categories-page-wrap">
+          <table className="table-category-tasks">
+            <thead className="table-header-category-tasks">
+              <tr>
+                <th className="table-header-category">Id</th>
+                <th className="table-header-category">Name</th>
+                <th className="table-header-category">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="save-category-container">
-        {editingCategory && (<button onClick={() => handleSaveEdit(editingCategory, editedCategoryName)}> Save</button> )}
-        </div>
-        <div className="input-category-container">
-        <input
-          type="text"
-          value={newCategoryName}
-          onChange={(e) => setNewCategoryName(e.target.value)}
-          placeholder="Enter category name"
-        />
-        <button onClick={handleAddCategory}>Add Category</button>
+            </thead>
+            <tbody>
+              {categories.map((category) => (
+                <tr key={category.id}>
+                  <td>{category.id}</td>
+                  <td
+                    className="clickable text-center"
+                    onDoubleClick={() =>
+                      handleEditCategoryName(category.id, category.name)
+                    }
+                  >
+                    {editingCategory === category.id ? (
+                      <input
+                        type="text"
+                        value={editedCategoryName || category.name}
+                        onChange={(e) => setEditedCategoryName(e.target.value)}
+                        onBlur={() =>
+                          handleSaveEdit(category.id, editedCategoryName)
+                        }
+                      />
+                    ) : (
+                      category.name
+                    )}
+                  </td>
+                  <td>
+                    <button onClick={() => handleRemoveCategory(category.id)}>
+                      Remove Category
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="save-category-container">
+            {editingCategory && (
+              <button
+                onClick={() =>
+                  handleSaveEdit(editingCategory, editedCategoryName)
+                }
+              >
+                {" "}
+                Save
+              </button>
+            )}
+          </div>
+          <div className="input-category-container">
+            <input
+              type="text"
+              value={newCategoryName}
+              onChange={(e) => setNewCategoryName(e.target.value)}
+              placeholder="Enter category name"
+            />
+            <button onClick={handleAddCategory}>Add Category</button>
+          </div>
+          <div className="homeMenu-button-container">
+            <button onClick={() => navigate("/Home")}>
+              Back to Scrum Board
+            </button>
+          </div>
+        </main>
       </div>
-      <div className="homeMenu-button-container">
-        <button onClick={() => navigate("/Home")}>Back to Scrum Board</button>
-      </div>
-      </main>
     </div>
   );
 };
-
 
 export default TaskCategories;
