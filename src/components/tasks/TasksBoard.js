@@ -26,9 +26,8 @@ function TasksBoard() {
       } else if (filteredCategoryId) {
         url += `/category/${filteredCategoryId}`;
       }
-      console.log("URL for HTTP request:", url);
-      const response = await fetch(url, {
-        method: "GET",
+      const response = await fetch(url, 
+        { method: "GET",
         headers: {
           "Content-Type": "application/json",
           token: token,

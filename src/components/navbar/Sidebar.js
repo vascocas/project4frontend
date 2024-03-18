@@ -7,6 +7,7 @@ const Sidebar = (props) => {
         <Menu>
             <a className="menu-item" href="/home">Home</a>
             <a className="menu-item" href="/profile">Profile</a>
+            <a className="menu-item" href="/profileUsers">Users Profile</a>
             <a className="menu-item" href="/user">User Managment</a>
             <a className="menu-item" href="/categories">Task Categories</a>
             <a className="menu-item" href="/recycle">Recicle Bin</a>

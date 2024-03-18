@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
-import UserProfile from "../components/users/UserProfile";
 import { userStore } from "../stores/UserStore";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 import "../index.css";
 
 function Profile() {
-  const { token, username, selectedProfileUsername  } = userStore();
+  const { token, username } = userStore();
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8080/project4vc/rest/users/${username}`,
+        const response = await fetch(`http://localhost:8080/project4vc/rest/users/${username}`,
           {
             method: "GET",
             headers: {
@@ -38,7 +36,7 @@ function Profile() {
 
     // Call fetchUserProfile once when the component mounts
     fetchUserProfile();
-  }, [token, selectedProfileUsername]);
+  }, [token]);
 
   // Function to handle updating user profile
   const handleUpdateProfile = async () => {
@@ -85,10 +83,6 @@ function Profile() {
     <div className="userProfile">
       <Header />
       <Sidebar />
-      <div className="select-user-profile">
-        <h3 id="h3Title">Change User</h3>
-        <UserProfile />
-      </div>
       <div className="profile-details">
         <h2>My Profile</h2>
         <label htmlFor="username">Username</label>
