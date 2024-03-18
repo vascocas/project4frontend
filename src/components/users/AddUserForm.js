@@ -19,7 +19,14 @@ function AddUserForm() {
       // Clear previous error message
       setMessage("");
       // Validate form fields
-      if (!username || !password || !email || !firstName || !lastName || !phone) {
+      if (
+        !username ||
+        !password ||
+        !email ||
+        !firstName ||
+        !lastName ||
+        !phone
+      ) {
         setMessage("All fields are required");
         return;
       }
@@ -55,15 +62,15 @@ function AddUserForm() {
         setUsers([...users, newUser]);
         // Handle successful addition of user
         console.log("User added:", newUser);
-          // Clear input fields after successful addition
-          setUsername("");
-          setPassword("");
-          setEmail("");
-          setFirstName("");
-          setLastName("");
-          setPhone("");
-          setPhoto("");
-          setRole("");
+        // Clear input fields after successful addition
+        setUsername("");
+        setPassword("");
+        setEmail("");
+        setFirstName("");
+        setLastName("");
+        setPhone("");
+        setPhoto("");
+        setRole("");
       } else {
         // Handle error response
         const errorMessage = await response.text();
@@ -119,10 +126,7 @@ function AddUserForm() {
         value={photo}
         onChange={(e) => setPhoto(e.target.value)}
       />
-      <select
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
-      >
+      <select value={role} onChange={(e) => setRole(e.target.value)}>
         <option value="">Select Role</option>
         <option value="DEVELOPER">Developer</option>
         <option value="SCRUM_MASTER">Scrum Master</option>

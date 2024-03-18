@@ -14,7 +14,8 @@ function Profile() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/project4vc/rest/users/${username}`,
+        const response = await fetch(
+          `http://localhost:8080/project4vc/rest/users/${username}`,
           {
             method: "GET",
             headers: {
@@ -36,10 +37,20 @@ function Profile() {
 
     // Call fetchUserProfile once when the component mounts
     fetchUserProfile();
-  }, [token]);
+  }, [token, username]);
 
   // Function to handle updating user profile
   const handleUpdateProfile = async () => {
+    if (
+      !user.password ||
+      !user.email ||
+      !user.firstName ||
+      !user.lastName ||
+      !user.phone
+    ) {
+      console.error("All fields are required");
+      return;
+    }
     try {
       const userData = {
         id: user.id,
