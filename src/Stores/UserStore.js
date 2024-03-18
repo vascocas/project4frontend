@@ -21,6 +21,8 @@ export const userStore = create(
       removeDeletedUser: (userId) => set((state) => ({ deletedUsers: state.deletedUsers.filter(user => user.id !== userId) })),
       usernames: [],
       setUsernames: (usernames) => set({ usernames }),
+      selectedProfileUsername: "", // New state variable for selected profile username
+      setSelectedProfileUsername: (username) => set({ selectedProfileUsername: username }), // Function to update selected profile username
     }),
     {
       name: "mystore",

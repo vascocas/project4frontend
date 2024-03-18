@@ -96,7 +96,6 @@ function TasksBoard() {
           <RemoveUserTasks fetchTasks={fetchTasks}/>
         </div>
       </div>
-
       <div className="task-columns">
         <TaskColumn
           title="TODO"
