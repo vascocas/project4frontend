@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
 import AddUserForm from "../components/users/AddUserForm";
 import UpdateRoleModal from "../components/users/UpdateRoleModal";
+import UsersProfile from "../components/users/UsersProfile";
+import ChangePasswordModal from "../components/users/ChangePasswordModal";
 import { userStore } from "../stores/UserStore";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
@@ -13,6 +15,7 @@ const UserManagement = () => {
   const { token, users, setUsers } = userStore();
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
   const deletedMapping = {
     false: "Active",
@@ -118,21 +121,68 @@ const UserManagement = () => {
     }
   };
 
+  const handleChangePassword = async (userId) => {
+    setSelectedUserId(userId);
+    setShowChangePasswordModal(true);
+  };
+
+  const handleConfirmChangePassword = async (
+    selectedUserId,
+    actualPassword,
+    newPassword,
+    confirmNewPassword
+  ) => {
+    try {
+      console.log(selectedUserId);
+      console.log(actualPassword);
+      console.log(newPassword);
+      console.log(confirmNewPassword);
+      const userData = {
+        id: selectedUserId,
+        password: actualPassword,
+        newPass: newPassword,
+        confirmPass: confirmNewPassword,
+      };
+      const requestBody = JSON.stringify(userData);
+      const response = await fetch(
+        `http://localhost:8080/project4vc/rest/users/othersPassword`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "*/*",
+            token: token,
+          },
+          body: requestBody,
+        }
+      );
+      if (response.ok) {
+        // Password updated successfully
+        alert("Password updated successfully!");
+      } else {
+        // Handle error
+        alert("Failed to update password.");
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+    }
+  };
+
   return (
-    <div className="task-categories-page">
+    <div className="user-managment-page">
       <Header />
       <Sidebar
-        pageWrapId={"categories-page-wrap"}
-        outerContainerId={"task-categories-page"}
+        pageWrapId={"user-managment-page-wrap"}
+        outerContainerId={"managment-page"}
       />
       <div className="content">
         <div className="add-user-column">
           <AddUserForm />
         </div>
         <div className="users-board">
-        <div className="content-title">
-          <h1 className="page-title">User Management</h1>
-        </div>
+          <div className="content-title">
+            <h1 className="page-title">User Management</h1>
+          </div>
           <h3>User List</h3>
           <table className="users-table">
             <thead>
@@ -159,6 +209,9 @@ const UserManagement = () => {
                       >
                         Update Role
                       </button>
+                      <button onClick={() => handleChangePassword(user.id)}>
+                        Change Password
+                      </button>
                       <button
                         className="users-table-button"
                         onClick={() => removeUser(user.id)}
@@ -176,11 +229,21 @@ const UserManagement = () => {
             onClose={() => setShowModal(false)}
             onConfirm={handleConfirmUpdateRole}
           />
+          <ChangePasswordModal
+            isOpen={showChangePasswordModal}
+            onRequestClose={() => setShowChangePasswordModal(false)}
+            onSubmit={handleConfirmChangePassword}
+            selectedUserId={selectedUserId}
+            title="Change Password"
+          />
           <div className="homeMenu-button-container">
             <button className="users-button" onClick={() => navigate("/Home")}>
               Back to Scrum Board
             </button>
           </div>
+        </div>
+        <div className="edit-user-column">
+          <UsersProfile />
         </div>
       </div>
     </div>

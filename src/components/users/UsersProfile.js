@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/navbar/Sidebar";
-import { userStore } from "../stores/UserStore";
+import { userStore } from "../../stores/UserStore";
 import { useNavigate } from "react-router-dom";
-import "./Profile.css";
-import "../index.css";
+import "../../pages/Profile.css";
+import "../../index.css";
 
-function ProfileUsers() {
+function UsersProfile() {
+  const navigate = useNavigate();
   const { token, usernames } = userStore();
   const [selectedUser, setSelectedUser] = useState({
     username: "",
@@ -17,7 +16,6 @@ function ProfileUsers() {
     photo: "",
   });
   const [selectedUsername, setSelectedUsername] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOtherUserProfile = async () => {
@@ -99,15 +97,26 @@ function ProfileUsers() {
     setSelectedUsername(selectedUsername);
   };
 
+  const handleCancel = () => {
+    setSelectedUser({
+      username: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      photo: ""
+    });
+    setSelectedUsername("");
+  };
+  
+
   if (!selectedUser) {
     return <div>Trouble while loading information...</div>;
   }
 
   return (
-    <div className="otherUserProfile">
-      <Header />
-      <Sidebar />
-      <div className="select-otherUser-profile">
+    <div>
+      <div className="otherUserProfile">
         <h3 id="select-title">Consult Users Profile</h3>
         <div>
           <label htmlFor="user">Choose user:</label>
@@ -176,10 +185,10 @@ function ProfileUsers() {
           }
         />
         <button onClick={handleUpdateOthersProfile}>Update Profile</button>
-        <button onClick={() => navigate("/Home")}>Back to Home</button>
+        <button onClick={handleCancel}>Cancel</button>
       </div>
     </div>
   );
 }
 
-export default ProfileUsers;
+export default UsersProfile;

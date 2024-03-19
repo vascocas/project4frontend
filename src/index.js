@@ -10,7 +10,6 @@ import Register from './pages/Register'
 import Home from './pages/Home'
 import Task from './pages/Task'
 import Profile from './pages/Profile'
-import ProfileUsers from './pages/ProfileUsers'
 import UserManagment from './pages/UserManagment'
 import TaskCategories from './pages/TaskCategories'
 import RecycleBin from './pages/RecycleBin'
@@ -24,7 +23,6 @@ root.render(
       <Route path="/home" element={<Home />} />
       <Route path="/task" element={<Task />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/profileUsers" element={<ProfileUsers />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/user" element={<UserManagment />} />
