@@ -8,6 +8,9 @@ const UsersFilter = ({ onFilter }) => {
   useEffect(() => {
     const fetchUsernames = async () => {
       try {
+        if (!token) {
+          return; // Exit early in the logout
+        }
         const response = await fetch(
           "http://localhost:8080/project4vc/rest/users/usernames",
           {
@@ -31,7 +34,7 @@ const UsersFilter = ({ onFilter }) => {
     };
 
     fetchUsernames();
-  }, [token, usernames, setUsernames]);
+  }, [token, setUsernames]);
 
   const handleFilter = () => {
     if (selectedUser) {

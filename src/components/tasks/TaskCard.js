@@ -99,7 +99,7 @@ function TaskCard({ title, priority, taskId, state }) {
         setShowMoveOptions(false);
         setShowOptions(false);
         // Update task state
-        updateTask({ id: taskId, state: selectedColumn });
+        updateTask({ id: taskId, state: selectedColumn, priority: priority, title: title });
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);
