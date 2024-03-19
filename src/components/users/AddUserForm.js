@@ -60,8 +60,7 @@ function AddUserForm() {
       if (response.ok) {
         const newUser = await response.json();
         setUsers([...users, newUser]);
-        // Handle successful addition of user
-        console.log("User added:", newUser);
+        console.log("User added!");
         // Clear input fields after successful addition
         setUsername("");
         setPassword("");
