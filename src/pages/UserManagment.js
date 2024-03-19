@@ -126,7 +126,6 @@ const UserManagement = () => {
         outerContainerId={"task-categories-page"}
       />
       <div className="content">
-        
         <div className="add-user-column">
           <AddUserForm />
         </div>

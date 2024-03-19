@@ -115,7 +115,7 @@ function AddUserForm() {
         onChange={(e) => setLastName(e.target.value)}
       />
       <input
-        type="text"
+        type="tel"
         placeholder="Phone"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}

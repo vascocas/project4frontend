@@ -128,7 +128,7 @@ function Profile() {
         />
         <label htmlFor="phone">Phone</label>
         <input
-          type="text"
+          type="tel"
           id="phone"
           value={user.phone}
           onChange={(e) => setUser({ ...user, phone: e.target.value })}
