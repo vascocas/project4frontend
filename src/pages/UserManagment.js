@@ -133,10 +133,6 @@ const UserManagement = () => {
     confirmNewPassword
   ) => {
     try {
-      console.log(selectedUserId);
-      console.log(actualPassword);
-      console.log(newPassword);
-      console.log(confirmNewPassword);
       const userData = {
         id: selectedUserId,
         password: actualPassword,

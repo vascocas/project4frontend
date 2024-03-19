@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
+import ChangePasswordModal from "../components/users/ChangePasswordModal";
 import { userStore } from "../stores/UserStore";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
@@ -9,6 +10,7 @@ import "../index.css";
 function Profile() {
   const { token, username } = userStore();
   const [user, setUser] = useState(null);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -83,6 +85,51 @@ function Profile() {
     }
   };
 
+  const handleConfirmChangePassword = async (
+    selectedUserId,
+    actualPassword,
+    newPassword,
+    confirmNewPassword
+  ) => {
+    try {
+      console.log(actualPassword);
+      console.log(newPassword);
+      console.log(confirmNewPassword);
+      const userData = {
+        id: selectedUserId,
+        password: actualPassword,
+        newPass: newPassword,
+        confirmPass: confirmNewPassword,
+      };
+      const requestBody = JSON.stringify(userData);
+      const response = await fetch(
+        `http://localhost:8080/project4vc/rest/users/password`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "*/*",
+            token: token,
+          },
+          body: requestBody,
+        }
+      );
+      if (response.ok) {
+        // Password updated successfully
+        alert("Password updated successfully!");
+      } else {
+        // Handle error
+        alert("Failed to update password.");
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+    }
+  };
+
+  const handleOpenChangePasswordModal = () => {
+    setShowChangePasswordModal(true);
+  };
+
   if (!user) {
     return <div>Trouble while loading information...</div>;
   }
@@ -132,6 +179,15 @@ function Profile() {
         />
         <button onClick={handleUpdateProfile}>Update Profile</button>
         <button onClick={() => navigate("/Home")}>Back to Home</button>
+        <ChangePasswordModal
+          isOpen={showChangePasswordModal}
+          onRequestClose={() => setShowChangePasswordModal(false)}
+          onSubmit={handleConfirmChangePassword}
+          title="Change Password"
+        />
+        <button onClick={() => handleOpenChangePasswordModal(user.id)}>
+          Change Password
+        </button>
       </div>
     </div>
   );
