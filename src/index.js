@@ -20,14 +20,16 @@ root.render(
   <Router>
     <Routes>
       <Route index element={<App />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
       <Route path="/home" element={<Home />} />
       <Route path="/task" element={<Task />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
       <Route path="/user" element={<UserManagment />} />
       <Route path="/categories" element={<TaskCategories />} />
       <Route path="/recycle" element={<RecycleBin />} />
+      
     </Routes>
   </Router>
 );
