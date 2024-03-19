@@ -42,7 +42,6 @@ const UserRecycle = () => {
     if (!confirmation) {
       return; // User cancelled the operation
     }
-    console.log(token);
     try {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/users/${userId}`,
@@ -57,8 +56,8 @@ const UserRecycle = () => {
       );
       const message = await response.text();
       if (response.ok) {
-        console.log(message);
-        userStore.getState().removeUser(userId); // Update userStore
+        console.log("Sucesso: ", message);
+        userStore.getState().removeDeletedUser(userId); // Update userStore
       } else {
         console.log(message);
       }

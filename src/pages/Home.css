@@ -5,8 +5,12 @@
 
 .page-wrap {
   width: 100%;
-  max-width: 1200px; /* Adjust max-width as needed */
-  margin: 0 auto; /* Center the page-wrap horizontally */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#home-page-wrap {
+  max-height: 1000px;
 }
 
 .content-wrapper {

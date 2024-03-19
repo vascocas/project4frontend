@@ -1,42 +1,46 @@
 /* CSS for TasksBoard component */
 .task-columns {
-  display: flex; /* Use flexbox layout */
+  display: flex;
   justify-content: space-between;
 }
 
+.tasks-board {
+  overflow-y: auto; 
+}
+
 .task-column {
-  flex: 1; /* Each column takes up equal space */
-  border: 1px solid #ccc; /* Add border around each column */
-  border-radius: 5px; /* Add border radius for rounded corners */
-  padding: 10px; /* Add padding inside the columns */
-  height: auto; /* Set height to auto to match content */
-  max-height: calc(100vh - 120px); /* Limit max height of columns */
-  overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px; 
+  height: auto;
+  max-height: 80vh;
+  overflow-y: auto; 
 }
 
 .task-column:last-child {
-  margin-right: 0; /* Remove margin from the last column */
+  margin-right: 0;
 }
 
 .task-column h2 {
-  text-align: center; /* Center align column title */
+  text-align: center;
 }
 
 .task-column ul {
-  list-style: none; /* Remove default list styles */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .task-card {
-  margin-bottom: 10px; /* Add margin between task cards */
-  padding: 10px; /* Add padding to task cards */
-  border: 1px solid #dbdbdb; /* Add border to task cards */
-  border-radius: 5px; /* Add border radius to task cards */
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
 }
 
 .card-header {
-  font-weight: bold; /* Make task title bold */
+  font-weight: bold;
 }
 
 .task-card.low-priority {
@@ -75,6 +79,6 @@
 
 .filters-box,
 .remove-user-tasks {
-  flex: 1; /* Both divs will take up equal space */
-  margin-right: 10px; /* Add some spacing between the divs */
+  flex: 1;
+  margin-right: 10px;
 }

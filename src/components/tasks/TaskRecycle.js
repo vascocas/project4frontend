@@ -25,12 +25,11 @@ const TaskRecycle = () => {
           const tasks = await response.json();
           setDeletedTasks(tasks);
         } else {
-          throw new Error(
-            `Failed to fetch deleted tasks: ${await response.text()}`
+          console.log(`No deleted tasks found: ${await response.text()}`
           );
         }
       } catch (error) {
-        console.error("Error fetching deleted tasks:", error);
+        console.error("No deleted tasks found:", error);
       }
     };
 
