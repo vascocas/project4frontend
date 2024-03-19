@@ -12,6 +12,10 @@
   margin-bottom: 8px;
 }
 
+#taskDescription {
+  resize: none;
+}
+
 .dropdown-priority,
 .dropdown-category {
   margin-bottom: 8px;

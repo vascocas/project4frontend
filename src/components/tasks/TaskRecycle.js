@@ -57,10 +57,10 @@ const TaskRecycle = () => {
       );
       const message = await response.text();
       if (response.ok) {
-        alert(message);
+        console.log(message);
         taskStore.getState().restoreTask(taskId); // Update taskStore
       } else {
-        alert(message);
+        console.log(message);
       }
     } catch (error) {
       console.error("Error restoring task:", error);
@@ -86,10 +86,10 @@ const TaskRecycle = () => {
       );
       const message = await response.text();
       if (response.ok) {
-        alert(message);
+        console.log(message);
         taskStore.getState().removeTask(taskId); // Update taskStore
       } else {
-        alert(message);
+        console.log(message);
       }
     } catch (error) {
       console.error("Error removing task:", error);

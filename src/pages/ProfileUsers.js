@@ -63,7 +63,6 @@ function ProfileUsers() {
     try {
       const userData = {
         id: selectedUser.id,
-        password: selectedUser.password,
         email: selectedUser.email,
         firstName: selectedUser.firstName,
         lastName: selectedUser.lastName,
@@ -72,7 +71,7 @@ function ProfileUsers() {
       };
       const requestBody = JSON.stringify(userData);
       const response = await fetch(
-        `http://localhost:8080/project4vc/rest/users/profile`,
+        `http://localhost:8080/project4vc/rest/users/othersProfile`,
         {
           method: "PUT",
           headers: {
@@ -109,7 +108,7 @@ function ProfileUsers() {
       <Header />
       <Sidebar />
       <div className="select-otherUser-profile">
-        <h3 id="select-title">Consult users profile</h3>
+        <h3 id="select-title">Consult Users Profile</h3>
         <div>
           <label htmlFor="user">Choose user:</label>
           <br />

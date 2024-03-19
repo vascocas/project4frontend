@@ -57,10 +57,10 @@ const UserRecycle = () => {
       );
       const message = await response.text();
       if (response.ok) {
-        alert(message);
+        console.log(message);
         userStore.getState().removeUser(userId); // Update userStore
       } else {
-        alert(message);
+        console.log(message);
       }
     } catch (error) {
       console.error("Error removing user:", error);

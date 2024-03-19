@@ -71,6 +71,10 @@ const TaskCategories = () => {
   };
 
   const handleRemoveCategory = async (categoryId) => {
+    const confirmation = window.confirm("Confirm remove category?");
+    if (!confirmation) {
+      return; // User cancelled the operation
+    }
     try {
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/tasks/category`,

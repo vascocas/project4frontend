@@ -15,7 +15,7 @@ function Profile() {
     const fetchUserProfile = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/project4vc/rest/users/${username}`,
+          `http://localhost:8080/project4vc/rest/users/user`,
           {
             method: "GET",
             headers: {
@@ -52,7 +52,6 @@ function Profile() {
     }
     try {
       const userData = {
-        id: user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
