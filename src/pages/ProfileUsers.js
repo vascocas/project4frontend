@@ -10,7 +10,6 @@ function ProfileUsers() {
   const { token, usernames } = userStore();
   const [selectedUser, setSelectedUser] = useState({
     username: "",
-    password: "",
     email: "",
     firstName: "",
     lastName: "",
@@ -53,7 +52,6 @@ function ProfileUsers() {
   const handleUpdateOthersProfile = async () => {
     // Check if any required fields are empty
     if (
-      !selectedUser.password ||
       !selectedUser.email ||
       !selectedUser.firstName ||
       !selectedUser.lastName ||
@@ -133,15 +131,6 @@ function ProfileUsers() {
           value={selectedUser.username}
           readOnly
         />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={selectedUser.password}
-          onChange={(e) =>
-            setSelectedUser({ ...selectedUser, password: e.target.value })
-          }
-        />
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -171,7 +160,7 @@ function ProfileUsers() {
         />
         <label htmlFor="phone">Phone</label>
         <input
-          type="text"
+          type="tel"
           id="phone"
           value={selectedUser.phone}
           onChange={(e) =>

@@ -42,7 +42,6 @@ function Profile() {
   // Function to handle updating user profile
   const handleUpdateProfile = async () => {
     if (
-      !user.password ||
       !user.email ||
       !user.firstName ||
       !user.lastName ||
@@ -54,7 +53,6 @@ function Profile() {
     try {
       const userData = {
         id: user.id,
-        password: user.password,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -98,13 +96,6 @@ function Profile() {
         <h2>My Profile</h2>
         <label htmlFor="username">Username</label>
         <input type="text" id="username" value={user.username} readOnly />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        />
         <label htmlFor="email">Email</label>
         <input
           type="email"
