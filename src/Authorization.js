@@ -4,9 +4,9 @@ import { userStore } from "./stores/UserStore";
 
 const Authorization = ({ children }) => {
   const { token } = userStore();
-
+  
   if (!token) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

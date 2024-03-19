@@ -13,6 +13,7 @@ import Profile from './pages/Profile'
 import UserManagment from './pages/UserManagment'
 import TaskCategories from './pages/TaskCategories'
 import RecycleBin from './pages/RecycleBin'
+import Authorization from './Authorization';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,14 +23,12 @@ root.render(
       <Route index element={<App />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-
-      <Route path="/home" element={<Home />} />
-      <Route path="/task" element={<Task />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/user" element={<UserManagment />} />
-      <Route path="/categories" element={<TaskCategories />} />
-      <Route path="/recycle" element={<RecycleBin />} />
-      
+      <Route path="/home" element={<Authorization><Home /></Authorization>} />
+      <Route path="/task" element={<Authorization><Task /></Authorization>} />
+      <Route path="/profile" element={<Authorization><Profile /></Authorization>} />
+      <Route path="/user" element={<Authorization><UserManagment /></Authorization>} />
+      <Route path="/categories" element={<Authorization><TaskCategories /></Authorization>} />
+      <Route path="/recycle" element={<Authorization><RecycleBin /></Authorization>} />
     </Routes>
   </Router>
 );
