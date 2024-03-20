@@ -42,7 +42,7 @@ function Login() {
       updateRole(loginDto.role);
       updatePhoto(loginDto.photo);
 
-      navigate("/Home", { replace: true });
+      navigate("/home", { replace: true });
     } catch (error) {
       console.error("Error logging in:", error);
       alert("Login failed. Please try again.");
