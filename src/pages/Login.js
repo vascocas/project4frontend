@@ -78,7 +78,7 @@ function Login() {
           </div>
           <br />
           <br />
-          <p>If you're not registered yet, create an account.</p>
+          <p>Don't have an account? Register here.</p>
         </form>
       </div>
     </div>
