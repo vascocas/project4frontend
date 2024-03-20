@@ -12,7 +12,7 @@ import "./UserManagement.css";
 
 const UserManagement = () => {
   const navigate = useNavigate();
-  const { token, users, setUsers } = userStore();
+  const { token, users, setUsers, usernames, setUsernames } = userStore();
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -70,7 +70,10 @@ const UserManagement = () => {
         }
       );
       if (response.ok) {
-        fetchUsers();
+        // Update users array
+        setUsers(users.filter((user) => user.id !== userId));
+        // Update usernames list
+        setUsernames(usernames.filter((username) => username.id !== userId));
       } else {
         // Handle error
         alert("Failed to remove user.");
