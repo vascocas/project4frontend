@@ -11,7 +11,7 @@ function TaskColumn({ title, tasks }) {
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            <TaskCard title={task.title} priority={task.priority} taskId={task.id} state={task.state} />
+            <TaskCard title={task.title} priority={task.priority} taskId={task.id} state={task.state} creator={task.creator} />
           </li>
         ))}
       </ul>

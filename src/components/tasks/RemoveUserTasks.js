@@ -8,18 +8,14 @@ const RemoveUserTasks = ({ fetchTasks }) => {
   const handleRemove = async () => {
     if (selectedUser) {
       try {
-        const requestBody = JSON.stringify({
-          id: selectedUser,
-        });
         const response = await fetch(
-          `http://localhost:8080/project4vc/rest/tasks/updateDeleted/userTasks`,
+          `http://localhost:8080/project4vc/rest/tasks/updateDeleted/${selectedUser}`,
           {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
               token: token,
             },
-            body: requestBody,
           }
         );
         if (response.ok) {

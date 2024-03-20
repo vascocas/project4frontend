@@ -4,7 +4,7 @@ import { taskStore } from "../../stores/TaskStore";
 import { useNavigate } from "react-router-dom";
 import "./TasksBoard.css";
 
-function TaskCard({ title, priority, taskId, state }) {
+function TaskCard({ title, priority, taskId, state, creator }) {
   const { token } = userStore();
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
   const [showMoveOptions, setShowMoveOptions] = useState(false); // State variable for visibility of move options
@@ -30,13 +30,12 @@ function TaskCard({ title, priority, taskId, state }) {
     try {
       // Send HTTP request to update task deleted boolean
       const response = await fetch(
-        "http://localhost:8080/project4vc/rest/tasks/updateDeleted",
+        `http://localhost:8080/project4vc/rest/tasks/updateDeleted/${taskId}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             token: token,
-            taskId: taskId,
           },
         }
       );
@@ -99,7 +98,12 @@ function TaskCard({ title, priority, taskId, state }) {
         setShowMoveOptions(false);
         setShowOptions(false);
         // Update task state
-        updateTask({ id: taskId, state: selectedColumn, priority: priority, title: title });
+        updateTask({
+          id: taskId,
+          state: selectedColumn,
+          priority: priority,
+          title: title,
+        });
       } else {
         const errorMessage = await response.text();
         console.error(errorMessage);
@@ -115,13 +119,23 @@ function TaskCard({ title, priority, taskId, state }) {
     navigate("../Task");
   };
 
+  // Function to generate the modified task title
+  const generateTaskTitle = () => {
+    // If the creator is erased, append the suffix to the title
+    if (creator == null) {
+      return `${title} (Creator Erased)`;
+    }
+    // If the creator is not erased, return the original title
+    return title;
+  };
+
   return (
     <div
       className={`task-card ${priorityClass}`}
       onMouseEnter={() => setShowOptions(true)}
       onMouseLeave={() => setShowOptions(false)}
     >
-      <div className="card-header">{title}</div>
+      <div className="card-header">{generateTaskTitle()}</div>
       <div className="task-options">
         {showOptions && !showMoveOptions && (
           <>

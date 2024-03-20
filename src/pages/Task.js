@@ -18,7 +18,7 @@ function Task() {
       try {
         if (token && taskId) {
           const response = await fetch(
-            `http://localhost:8080/project4vc/rest/tasks/${taskId}`,
+            `http://localhost:8080/project4vc/rest/tasks/task/?taskId=${taskId}`,
             {
               method: "GET",
               headers: {

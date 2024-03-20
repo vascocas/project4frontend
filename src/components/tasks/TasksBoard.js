@@ -22,9 +22,9 @@ function TasksBoard() {
     try {
       let url = "http://localhost:8080/project4vc/rest/tasks/all";
       if (filteredUserId) {
-        url += `/user/${filteredUserId}`;
+        url += `/user/?userId=${filteredUserId}`;
       } else if (filteredCategoryId) {
-        url += `/category/${filteredCategoryId}`;
+        url += `/category/?categoryId=${filteredCategoryId}`;
       }
       const response = await fetch(url, 
         { method: "GET",
@@ -55,7 +55,7 @@ function TasksBoard() {
     if (token) {
       fetchTasks();
     }
-  }, [token, filteredUserId, filteredCategoryId]);
+  }, [token, filteredUserId, filteredCategoryId, ]);
 
   // Function to sort tasks by priority, start date, and end date
   function sortTasks(tasks) {
@@ -68,7 +68,6 @@ function TasksBoard() {
   };
 
   const handleCategoryFilter = (categoryId) => {
-    console.log("User filter applied with user ID:", categoryId);
     setFilteredCategoryId(categoryId);
     setFilteredUserId(""); // Reset user filter
   };

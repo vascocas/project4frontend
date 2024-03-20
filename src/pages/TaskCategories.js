@@ -77,7 +77,7 @@ const TaskCategories = () => {
     }
     try {
       const response = await fetch(
-        `http://localhost:8080/project4vc/rest/tasks/category`,
+        `http://localhost:8080/project4vc/rest/tasks/category/?categoryId=${categoryId}`,
         {
           method: "DELETE",
           headers: {
@@ -85,7 +85,6 @@ const TaskCategories = () => {
             Accept: "*/*",
             token: token,
           },
-          body: JSON.stringify({ id: categoryId }),
         }
       );
       if (response.ok) {

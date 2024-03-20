@@ -28,6 +28,15 @@
   color: #61dafb;
 }
 
+.page-wrap {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center; 
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

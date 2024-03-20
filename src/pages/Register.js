@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
 import "./Register.css";
+import '../App.css';
 
 function Register() {
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ function Register() {
 
   return (
     <div className="Register" id="register-outer-container">
+      <div className="left-page-wrap"></div>
       <div className="page-wrap" id="register-page-wrap">
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
@@ -96,7 +98,6 @@ function Register() {
               onChange={handleChange}
             />
           </label>
-
           <label>
             Enter your password:
             <input
@@ -116,7 +117,6 @@ function Register() {
               onChange={handleChange}
             />
           </label>
-
           <label>
             Enter your email:
             <input
@@ -126,7 +126,6 @@ function Register() {
               onChange={handleChange}
             />
           </label>
-
           <label>
             Enter your first name:
             <input
@@ -136,7 +135,6 @@ function Register() {
               onChange={handleChange}
             />
           </label>
-
           <label>
             Enter your last name:
             <input
@@ -146,7 +144,6 @@ function Register() {
               onChange={handleChange}
             />
           </label>
-
           <label>
             Enter your phone number:
             <input
@@ -156,7 +153,6 @@ function Register() {
               onChange={handleChange}
             />
           </label>
-
           <label>
             Enter your photo URL:
             <input
@@ -166,10 +162,10 @@ function Register() {
               onChange={handleChange}
             />
           </label>
-
           <input type="submit" value="Register" />
         </form>
       </div>
+      <div className="right-page-wrap"></div>
     </div>
   );
 }

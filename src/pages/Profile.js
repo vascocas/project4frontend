@@ -17,7 +17,7 @@ function Profile() {
     const fetchUserProfile = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/project4vc/rest/users/user`,
+          `http://localhost:8080/project4vc/rest/users/loggedUser`,
           {
             method: "GET",
             headers: {
@@ -92,9 +92,6 @@ function Profile() {
     confirmNewPassword
   ) => {
     try {
-      console.log(actualPassword);
-      console.log(newPassword);
-      console.log(confirmNewPassword);
       const userData = {
         id: selectedUserId,
         password: actualPassword,
