@@ -12,7 +12,7 @@ import "./UserManagement.css";
 
 const UserManagement = () => {
   const navigate = useNavigate();
-  const { token, users, setUsers, usernames, setUsernames } = userStore();
+  const { token, users, setUsers, usernames, setUsernames, updateRole } = userStore();
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -115,6 +115,7 @@ const UserManagement = () => {
       if (response.ok) {
         fetchUsers();
         setShowModal(false); // Close the modal
+        updateRole(newRole);
       } else {
         // Handle error
         alert("Failed to update user role.");
