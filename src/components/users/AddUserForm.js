@@ -41,6 +41,24 @@ function AddUserForm() {
         setMessage("All fields are required");
         return;
       }
+
+      // Check password length and strong password using regular expression
+      const strongPasswordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/;
+      if (
+        inputs.password.length < 4 ||
+        !strongPasswordRegex.test(inputs.password)
+      ) {
+        if (inputs.password.length < 4) {
+          alert("Password must be at least 4 characters long");
+        } else {
+          alert(
+            "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+          );
+        }
+        return;
+      }
+
       // Check if passwords match
       if (inputs.password !== inputs.confirmPassword) {
         setMessage("Passwords do not match");
@@ -149,6 +167,16 @@ function AddUserForm() {
         name="phone"
         value={inputs.phone}
         onChange={handleChange}
+        onKeyDown={(e) => {
+          if (
+            !/\d/.test(e.key) &&
+            e.key !== "Backspace" &&
+            e.key !== "Delete"
+          ) {
+            e.preventDefault();
+            alert("Please enter only numeric characters.");
+          }
+        }}
       />
       <input
         type="text"

@@ -82,7 +82,7 @@ function UsersProfile() {
       );
       if (response.ok) {
         // Display a success message
-        console.log("Profile updated successfully!");
+        alert("Profile updated successfully!");
         navigate("/Home");
       } else {
         // Display an error message if request fails

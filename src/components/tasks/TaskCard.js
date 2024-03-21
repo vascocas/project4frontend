@@ -5,15 +5,18 @@ import { useNavigate } from "react-router-dom";
 import "./TasksBoard.css";
 
 function TaskCard({ title, priority, taskId, state, creator }) {
+    // Fetch user token and role from userStore
   const { token } = userStore();
   const { role } = userStore(state => state);
-  const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
-  const [showMoveOptions, setShowMoveOptions] = useState(false); // State variable for visibility of move options
-  const [selectedColumn, setSelectedColumn] = useState(""); // State variable for selected column
+    // State variables for visibility of options and move options
+  const [showOptions, setShowOptions] = useState(false);
+  const [showMoveOptions, setShowMoveOptions] = useState(false);
+  // State variable for selected column
+  const [selectedColumn, setSelectedColumn] = useState(""); 
   const { deleteTask, updateTask } = taskStore();
-
   const navigate = useNavigate();
 
+  // Determine priority class based on priority
   let priorityClass = "";
   if (priority === "LOW_PRIORITY") {
     priorityClass = "low-priority";
@@ -23,13 +26,13 @@ function TaskCard({ title, priority, taskId, state, creator }) {
     priorityClass = "high-priority";
   }
 
+  // Handle Remove Task
   const handleRemove = async () => {
     const confirmation = window.confirm("Confirm delete task?");
     if (!confirmation) {
       return; // User cancelled the operation
     }
     try {
-      // Send HTTP request to update task deleted boolean
       const response = await fetch(
         `http://localhost:8080/project4vc/rest/tasks/updateDeleted/${taskId}`,
         {
@@ -54,6 +57,7 @@ function TaskCard({ title, priority, taskId, state, creator }) {
     }
   };
 
+  // Handle Move Task
   const handleMove = () => {
     setShowOptions(false);
     setShowMoveOptions(true);
@@ -63,6 +67,7 @@ function TaskCard({ title, priority, taskId, state, creator }) {
     setSelectedColumn(e.target.value);
   };
 
+  // Handle Move Task Confirmation
   const handleMoveConfirm = async () => {
     if (!selectedColumn) {
       alert("Please select a column.");

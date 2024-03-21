@@ -14,8 +14,11 @@ function AddTaskForm() {
   const [category, setCategory] = useState("");
   const [message, setMessage] = useState("");
 
+
+
   useEffect(() => {
     if (token) {
+      // Get all categories to populate categories dropdown menu
       const fetchCategories = async () => {
         try {
           const response = await fetch(
@@ -30,6 +33,7 @@ function AddTaskForm() {
           );
           if (response.ok) {
             const data = await response.json();
+            // Set categories in Task Store
             setCategories(data);
           } else {
             console.error("Failed to fetch categories:", response.statusText);
@@ -43,10 +47,12 @@ function AddTaskForm() {
     }
   }, [token, setCategories]);
 
+  // Define priority from the priority dropdown menu
   const handlePriorityChange = (event) => {
     setPriority(event.target.value);
   };
 
+  // Add a new task and add it to TODO column
   const handleAddTask = async () => {
     try {
       // Clear previous error message
@@ -59,6 +65,7 @@ function AddTaskForm() {
       if (!priority) {
         throw new Error("No priority selected");
       }
+      // Creates taskDto
       const requestBody = JSON.stringify({
         title: title,
         description: description,
@@ -82,8 +89,9 @@ function AddTaskForm() {
 
       if (response.ok) {
         const newTask = await response.json();
+        // Add task in Task Store
         addTask(newTask);
-        console.log("Task added successfully");
+        // Clear input fields
         setTitle("");
         setDescription("");
         setPriority("");
@@ -95,9 +103,11 @@ function AddTaskForm() {
         throw new Error(errorMessage);
       }
     } catch (error) {
-      setMessage(error.message); // Set error message
+      // Set error message
+      setMessage(error.message);
     }
   };
+
 
   return (
     <aside className="add-task-sidebar">

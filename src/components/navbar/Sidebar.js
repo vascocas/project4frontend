@@ -5,8 +5,8 @@ import './Sidebar.css';
 
 const Sidebar = () => {
     const { role } = userStore(state => state);
-
     return (
+        // Different itens of the Sidebar
         <Menu>
             <a className="menu-item" href="/home">Home</a>
             <a className="menu-item" href="/profile">Profile</a>

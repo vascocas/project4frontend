@@ -122,7 +122,7 @@ const TaskCategories = () => {
       }
     } catch (error) {
       console.error("Error adding category:", error);
-      alert("Error adding category");
+      alert("Category name cannot be empty");
     }
   };
 

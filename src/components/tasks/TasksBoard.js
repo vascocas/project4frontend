@@ -44,7 +44,6 @@ function TasksBoard() {
         const message = await response.text();
         console.error("Tasks array is empty:", message);
         setTasks([]);
-        alert("Tasks array is empty", message);
       }
     } catch (error) {
       console.error("Error:", error);

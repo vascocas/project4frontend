@@ -5,6 +5,7 @@ const RemoveUserTasks = ({ fetchTasks }) => {
   const { token, usernames } = userStore();
   const [selectedUser, setSelectedUser] = useState("");
 
+  // Remove all tasks from the selected user (move to recycle bin)
   const handleRemove = async () => {
     if (selectedUser) {
       try {

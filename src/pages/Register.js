@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
 import "./Register.css";
-import '../App.css';
+import "../App.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -41,6 +41,20 @@ function Register() {
     // Check for empty inputs
     if (!username || !password || !email || !firstName || !lastName || !phone) {
       alert("All fields are required");
+      return;
+    }
+
+    // Check password length and strong password using regular expression
+    const strongPasswordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/;
+    if (password.length < 4 || !strongPasswordRegex.test(password)) {
+      if (password.length < 4) {
+        alert("Password must be at least 4 characters long");
+      } else {
+        alert(
+          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+        );
+      }
       return;
     }
 
@@ -106,6 +120,11 @@ function Register() {
               value={inputs.password}
               onChange={handleChange}
             />
+            <span className="help-tip">
+              Password must be at least 4 characters long and contain at least
+              one uppercase letter, one lowercase letter, one number, and one
+              special character
+            </span>
           </label>
 
           <label>
@@ -125,6 +144,9 @@ function Register() {
               value={inputs.email}
               onChange={handleChange}
             />
+            <span className="help-tip">
+              We'll send your registration confirmation here
+            </span>
           </label>
           <label>
             Enter your first name:
@@ -151,7 +173,18 @@ function Register() {
               name="phone"
               value={inputs.phone}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (
+                  !/\d/.test(e.key) &&
+                  e.key !== "Backspace" &&
+                  e.key !== "Delete"
+                ) {
+                  e.preventDefault();
+                  alert("Please enter only numeric characters.");
+                }
+              }}
             />
+            <span className="help-tip">Format: XXXXXXXXX</span>
           </label>
           <label>
             Enter your photo URL:
@@ -161,6 +194,9 @@ function Register() {
               value={inputs.photo}
               onChange={handleChange}
             />
+            <span className="help-tip">
+              Provide a URL to your profile picture
+            </span>
           </label>
           <input type="submit" value="Register" />
         </form>

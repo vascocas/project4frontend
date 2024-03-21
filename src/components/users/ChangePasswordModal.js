@@ -18,6 +18,21 @@ const ChangePasswordModal = ({
       setErrorMessage("All fields are required.");
       return;
     }
+
+    // Check password length and strong password using regular expression
+    const strongPasswordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/;
+    if (newPassword.length < 4 || !strongPasswordRegex.test(newPassword)) {
+      if (newPassword.length < 4) {
+        alert("Password must be at least 4 characters long");
+      } else {
+        alert(
+          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+        );
+      }
+      return;
+    }
+
     if (newPassword !== confirmNewPassword) {
       setErrorMessage("New password and confirm password must match.");
       return;
