@@ -19,7 +19,7 @@ function Task() {
       try {
         if (token && taskId) {
           const response = await fetch(
-            `http://localhost:8080/project4vc/rest/tasks/task/?taskId=${taskId}`,
+            `http://localhost:8080/project4vc/rest/tasks/${taskId}`,
             {
               method: "GET",
               headers: {
@@ -43,7 +43,6 @@ function Task() {
     fetchTask();
   }, [token, taskId, categories]);
   
-  console.log(task.creator);
 
   // Function to handle updating task details
   const handleUpdateTask = async () => {
@@ -148,8 +147,7 @@ function Task() {
             </option>
           ))}
         </select>
-        
-        {(role === "PRODUCT_OWNER" || role === "SCRUM_MASTER" ) && (<button onClick={handleUpdateTask}>Update Task</button>)}
+        {(role === "PRODUCT_OWNER" || role === "SCRUM_MASTER" || task.creator===username ) && (<button onClick={handleUpdateTask}>Update Task</button>)}
         <button onClick={() => navigate("/Home")}>Back to Scrum Board</button>
       </div>
     </div>

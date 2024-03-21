@@ -104,6 +104,7 @@ function TaskCard({ title, priority, taskId, state, creator }) {
           state: selectedColumn,
           priority: priority,
           title: title,
+          creator: creator,
         });
       } else {
         const errorMessage = await response.text();
@@ -121,9 +122,7 @@ function TaskCard({ title, priority, taskId, state, creator }) {
   };
 
   // Function to generate the modified task title
-  const generateTaskTitle = () => {
-    console.log("creator", creator);
-    
+  const generateTaskTitle = () => {  
     // If the creator is erased, append the suffix to the title
     if (creator == null) {
       return `${title} (Creator Erased)`;
