@@ -21,7 +21,7 @@ function TasksBoard() {
       return; // If token is not present, exit the function early
     }
     try {
-      let url = "http://localhost:8080/project4vc/rest/tasks/all";
+      let url = "http://localhost:8080/project4vc/rest/tasks";
       if (filteredUserId) {
         url += `/user/?userId=${filteredUserId}`;
       } else if (filteredCategoryId) {
