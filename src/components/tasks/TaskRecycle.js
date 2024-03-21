@@ -6,6 +6,7 @@ import "../../pages/RecycleBin.css";
 const TaskRecycle = () => {
   const { deletedTasks, setDeletedTasks } = taskStore();
   const { token } = userStore();
+  const { role } = userStore(state => state);
 
   useEffect(() => {
     const fetchDeletedTasks = async () => {
@@ -43,14 +44,13 @@ const TaskRecycle = () => {
     }
     try {
       const response = await fetch(
-        `http://localhost:8080/project4vc/rest/tasks/restoreDeleted`,
+        `http://localhost:8080/project4vc/rest/tasks/restoreDeleted/${taskId}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Accept: "*/*",
             token: token,
-            taskId: taskId,
           },
         }
       );
@@ -101,7 +101,7 @@ const TaskRecycle = () => {
         <tr>
           <th className="table-header-recycle">Id</th>
           <th className="table-header-recycle">Title</th>
-          <th className="table-header-recycle">Actions</th>
+          {(role === "PRODUCT_OWNER" && <th className="table-header-recycle">Actions</th>)}
         </tr>
       </thead>
       <tbody>
@@ -109,10 +109,10 @@ const TaskRecycle = () => {
           <tr key={task.id}>
             <td>{task.id}</td>
             <td>{task.title}</td>
-            <td>
+            {(role === "PRODUCT_OWNER" && <td>
               <button className="recycle-button" onClick={() => restoreTask(task.id)}>Restore Task</button>
               <button className="recycle-button" onClick={() => removeTask(task.id)}>Remove Task</button>
-            </td>
+            </td>)}
           </tr>
         ))}
       </tbody>

@@ -7,6 +7,7 @@ import "../../index.css";
 function UsersProfile() {
   const navigate = useNavigate();
   const { token, usernames } = userStore();
+  const { role } = userStore(state => state);
   const [selectedUser, setSelectedUser] = useState({
     username: "",
     email: "",
@@ -184,7 +185,7 @@ function UsersProfile() {
             setSelectedUser({ ...selectedUser, photo: e.target.value })
           }
         />
-        <button onClick={handleUpdateOthersProfile}>Update Profile</button>
+        {(role === "PRODUCT_OWNER" && <button onClick={handleUpdateOthersProfile}>Update Profile</button>)}
         <button onClick={handleCancel}>Cancel</button>
       </div>
     </div>

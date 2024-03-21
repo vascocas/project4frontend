@@ -8,7 +8,8 @@ import "./Task.css";
 import "../index.css";
 
 function Task() {
-  const { token } = userStore();
+  const { token, username } = userStore();
+  const { role } = userStore(state => state);
   const [task, setTask] = useState(null);
   const { categories, taskId, updateTask } = taskStore();
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ function Task() {
     fetchTask();
   }, [token, taskId, categories]);
   
+  console.log(task.creator);
 
   // Function to handle updating task details
   const handleUpdateTask = async () => {
@@ -146,7 +148,8 @@ function Task() {
             </option>
           ))}
         </select>
-        <button onClick={handleUpdateTask}>Update Task</button>
+        
+        {(role === "PRODUCT_OWNER" || role === "SCRUM_MASTER" ) && (<button onClick={handleUpdateTask}>Update Task</button>)}
         <button onClick={() => navigate("/Home")}>Back to Scrum Board</button>
       </div>
     </div>

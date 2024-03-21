@@ -10,6 +10,7 @@ import "./TasksBoard.css";
 
 function TasksBoard() {
   const { token } = userStore();
+  const { role } = userStore(state => state);
   const { tasks, setTasks } = taskStore();
   const [filteredUserId, setFilteredUserId] = useState("");
   const [filteredCategoryId, setFilteredCategoryId] = useState("");
@@ -81,17 +82,16 @@ function TasksBoard() {
   return (
     <div>
       <div className="filters">
-        <div className="filters-box">
-          <h3 id="filtersTitle">Filters</h3>
+      {(role === "PRODUCT_OWNER" || role === "SCRUM_MASTER") && (<div className="filters-box">
+         <h3 id="filtersTitle">Filters</h3>
           <TasksUserFilter onFilter={handleUserFilter} />
           <TasksCategoryFilter onFilter={handleCategoryFilter} />
           <button id="clearButton" onClick={fetchAllTasks}>
-            Clear
-          </button>
-        </div>
+            Clear </button>
+        </div>)}
         <div className="remove-user-tasks">
-        <h3 id="filtersTitle">Remove Tasks</h3>
-          <RemoveUserTasks fetchTasks={fetchTasks}/>
+        {role === "PRODUCT_OWNER" && ( <h3 id="filtersTitle">Remove Tasks</h3>)}
+        {role === "PRODUCT_OWNER" && (<RemoveUserTasks fetchTasks={fetchTasks}/>)}
         </div>
       </div>
       <div className="task-columns">

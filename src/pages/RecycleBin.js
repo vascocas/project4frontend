@@ -4,12 +4,14 @@ import React from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { userStore } from "../stores/UserStore";
 import TaskRecycle from "../components/tasks/TaskRecycle";
 import UserRecycle from "../components/users/UserRecycle";
 import "../index.css";
 import "./RecycleBin.css";
 
 const RecycleBin = () => {
+  const { role } = userStore(state => state);
   const navigate = useNavigate();
 
   return (
@@ -25,12 +27,12 @@ const RecycleBin = () => {
               <TaskRecycle />
             </div>
           </div>
-          <div className="recycle-column">
+          {role === "PRODUCT_OWNER" && (<div className="recycle-column">
             <h2>Deleted Users</h2>
             <div className="userRecycle-container">
               <UserRecycle />
             </div>
-          </div>
+          </div>)}
         </div>
         <div className="homeMenu-button-container">
           <button className="recycle-button" onClick={() => navigate("/Home")}>

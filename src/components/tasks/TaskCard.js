@@ -6,6 +6,7 @@ import "./TasksBoard.css";
 
 function TaskCard({ title, priority, taskId, state, creator }) {
   const { token } = userStore();
+  const { role } = userStore(state => state);
   const [showOptions, setShowOptions] = useState(false); // State variable for visibility of options
   const [showMoveOptions, setShowMoveOptions] = useState(false); // State variable for visibility of move options
   const [selectedColumn, setSelectedColumn] = useState(""); // State variable for selected column
@@ -121,6 +122,8 @@ function TaskCard({ title, priority, taskId, state, creator }) {
 
   // Function to generate the modified task title
   const generateTaskTitle = () => {
+    console.log("creator", creator);
+    
     // If the creator is erased, append the suffix to the title
     if (creator == null) {
       return `${title} (Creator Erased)`;
@@ -145,9 +148,9 @@ function TaskCard({ title, priority, taskId, state, creator }) {
             <button className="tasks-button" onClick={handleConsult}>
               Consult
             </button>
-            <button className="tasks-button" onClick={handleRemove}>
+            {(role === "PRODUCT_OWNER" || role === "SCRUM_MASTER") && (<button className="tasks-button" onClick={handleRemove}>
               Remove
-            </button>
+            </button>)}
           </>
         )}
         {showMoveOptions && (

@@ -13,6 +13,7 @@ import "./UserManagement.css";
 const UserManagement = () => {
   const navigate = useNavigate();
   const { token, users, setUsers, usernames, setUsernames, updateRole } = userStore();
+  const { role } = userStore(state => state);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -177,9 +178,9 @@ const UserManagement = () => {
       />
       <div className="content">
         <div className="add-user-column">
-          <AddUserForm />
+        {(role === "PRODUCT_OWNER" && <AddUserForm />)}
         </div>
-        <div className="users-board">
+        {(role === "PRODUCT_OWNER" &&  <div className="users-board">
           <div className="content-title">
             <h1 className="page-title">User Management</h1>
           </div>
@@ -241,10 +242,10 @@ const UserManagement = () => {
               Back to Scrum Board
             </button>
           </div>
-        </div>
-        <div className="edit-user-column">
+        </div>)}
+        {(role === "PRODUCT_OWNER" || role === "SCRUM_MASTER") && (<div className="edit-user-column">
           <UsersProfile />
-        </div>
+        </div>)}
       </div>
     </div>
   );
