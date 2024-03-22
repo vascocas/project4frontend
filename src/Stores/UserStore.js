@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
+const storage = createJSONStorage(() => sessionStorage);
+
 export const userStore = create(
   persist(
     (set) => ({
@@ -25,8 +27,8 @@ export const userStore = create(
       setSelectedProfileUsername: (username) => set({ selectedProfileUsername: username }), // Function to update selected profile username
     }),
     {
-      name: "mystore",
-      getStorage: () => createJSONStorage(() => sessionStorage),
+      name: "myUserStore",
+      storage: storage,
     }
   )
 );

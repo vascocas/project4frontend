@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
-import "./Login.css";
+import "./Login_Register.css";
 
 function Login() {
   const { updateUsername, updateToken, updateRole, updatePhoto } = userStore();
@@ -51,6 +51,7 @@ function Login() {
 
   return (
     <div className="Login" id="profile-outer-container">
+      <div className="left-page-wrap"></div>
       <div className="page-wrap" id="login-page-wrap">
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
@@ -81,6 +82,7 @@ function Login() {
           <p>Don't have an account? Register here.</p>
         </form>
       </div>
+      <div className="right-page-wrap"></div>
     </div>
   );
 }

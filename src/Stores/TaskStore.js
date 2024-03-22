@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { compareTasks } from "../components/tasks/TaskUtils";
 
+const storage = createJSONStorage(() => sessionStorage);
+
 export const taskStore = create(
   persist(
     (set) => ({
@@ -40,7 +42,7 @@ export const taskStore = create(
     }),
     {
       name: "myTaskStore",
-      getStorage: () => createJSONStorage(() => sessionStorage),
+      storage: storage,
     }
   )
 );

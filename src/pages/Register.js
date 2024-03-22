@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
-import "./Register.css";
+import "./Login_Register.css";
 import "../App.css";
 
 function Register() {
@@ -102,7 +102,7 @@ function Register() {
       <div className="left-page-wrap"></div>
       <div className="page-wrap" id="register-page-wrap">
         <h1>Register</h1>
-        <form onSubmit={handleSubmit}>
+        <form id="register-form" onSubmit={handleSubmit}>
           <label>
             Enter your username:
             <input
@@ -126,7 +126,6 @@ function Register() {
               special character
             </span>
           </label>
-
           <label>
             Confirm your password:
             <input
