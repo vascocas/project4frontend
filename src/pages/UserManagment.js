@@ -177,78 +177,83 @@ const UserManagement = () => {
         outerContainerId={"managment-page"}
       />
       <div className="content">
-      <div className="content-title">
-      <h1 className="page-title">User Management</h1>
-      </div>
-        <div className="add-user-column">
-        {(role === "PRODUCT_OWNER" && <AddUserForm />)}
-        </div>
-        {(role === "PRODUCT_OWNER" &&  <div className="users-board">          
-          <h3>User List</h3>
-          <table className="users-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Role</th>
-                <th>State</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.username}</td>
-                  <td>{user.role}</td>
-                  <td>{deletedMapping[user.deleted]}</td>
-                  <td>
-                    <div>
-                      <button
-                        className="users-table-button"
-                        onClick={() => handleUpdateRole(user.id)}
-                      >
-                        Update Role
-                      </button>
-                      <button onClick={() => handleChangePassword(user.id)}>
-                        Change Password
-                      </button>
-                      <button
-                        className="users-table-button"
-                        onClick={() => removeUser(user.id)}
-                      >
-                        Remove User
-                      </button>
-                    </div>
-                  </td>
+        <div className="user-columns">
+        {(role === "PRODUCT_OWNER" && <div className="add-user-column">
+        <h3 id="addUserTitle">Add User</h3>
+            <AddUserForm />
+          </div>)}
+          {(role === "PRODUCT_OWNER" &&  <div className="users-board">   
+          <h1 className="page-title">User Management</h1>       
+          <h3 id="usersTableTitle">Users List</h3>
+            <table className="users-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>State</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <UpdateRoleModal
-            show={showModal}
-            onClose={() => setShowModal(false)}
-            onConfirm={handleConfirmUpdateRole}
-          />
-          <ChangePasswordModal
-            isOpen={showChangePasswordModal}
-            onRequestClose={() => setShowChangePasswordModal(false)}
-            onSubmit={handleConfirmChangePassword}
-            selectedUserId={selectedUserId}
-            title="Change Password"
-          />
-          <div className="homeMenu-button-container">
-            <button className="users-button" onClick={() => navigate("/Home")}>
-              Back to Scrum Board
-            </button>
-          </div>
-        </div>)}
-        {(role === "PRODUCT_OWNER" || role === "SCRUM_MASTER") && (<div className="edit-user-column">
-          <UsersProfile />
-        </div>)}
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.id}</td>
+                    <td>{user.username}</td>
+                    <td>{user.role}</td>
+                    <td>{deletedMapping[user.deleted]}</td>
+                    <td>
+                      <div>
+                        <button
+                          className="users-table-button"
+                          onClick={() => handleUpdateRole(user.id)}
+                        >
+                          Update Role
+                        </button>
+                        <button 
+                        className="users-table-button1"
+                        onClick={() => handleChangePassword(user.id)}>
+                          Change Password
+                        </button>
+                        <button
+                          className="users-table-button"
+                          onClick={() => removeUser(user.id)}
+                        >
+                          Remove User
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <UpdateRoleModal
+              show={showModal}
+              onClose={() => setShowModal(false)}
+              onConfirm={handleConfirmUpdateRole}
+            />
+            <ChangePasswordModal
+              isOpen={showChangePasswordModal}
+              onRequestClose={() => setShowChangePasswordModal(false)}
+              onSubmit={handleConfirmChangePassword}
+              selectedUserId={selectedUserId}
+              title="Change Password"
+            />
+            <div className="homeMenu-button-container">
+              <button id="usersBackButton" className="users-button" onClick={() => navigate("/Home")}>
+                Back to Scrum Board
+              </button>
+            </div>
+          </div>)}
+          {(role === "PRODUCT_OWNER" || role === "SCRUM_MASTER") && (<div className="edit-user-column">
+          <h3 id="usersProfileTitle">Consult Users Profile</h3>
+            <UsersProfile />
+          </div>)}
+        </div>
       </div>
     </div>
   );
 };
 
 export default UserManagement;
+

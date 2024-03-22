@@ -40,6 +40,34 @@
   padding: 0 10px; /* Adjust padding */
 }
 
+#categoryTableButton{
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #007bff;
+  border: 1px solid white;
+  color: #fff;
+  border-radius: 5px;
+  display: block; /* Convert buttons into block-level elements */
+  margin: auto; 
+}
+
+#categoryTableButton:hover{
+  background-color: #0056b3;
+}
+
+.input-category-container input[type="text"] {
+  width: 400px;
+}
+
+.input-category-container button{
+  cursor: pointer;
+  background-color: #007bff;
+  border: 1px solid white;
+  color: #fff;
+  border-radius: 5px;
+}
+
 .homeMenu-button-container {
   display: flex;
   justify-content: center;
@@ -50,14 +78,14 @@
 .homeMenu-button-container button {
   cursor: pointer;
   padding: 10px 20px; /* Adjust padding */
-  background-color: #515355;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
 }
 
 .homeMenu-button-container button:hover {
-  background-color: #333;
+  background-color: #0056b3;
 }
 
 .content {

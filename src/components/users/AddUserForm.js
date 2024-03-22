@@ -118,7 +118,6 @@ function AddUserForm() {
 
   return (
     <div className="add-user-form">
-      <h3>Add User</h3>
       <input
         type="text"
         placeholder="Username"

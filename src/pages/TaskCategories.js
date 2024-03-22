@@ -144,7 +144,9 @@ const TaskCategories = () => {
         outerContainerId={"task-categories-page"}
       />
       <div className="content">
+      
         <main id="categories-page-wrap">
+        <h1 className="page-title">Task Categories</h1>
           <table className="table-category-tasks">
             <thead className="table-header-category-tasks">
               <tr>
@@ -177,7 +179,7 @@ const TaskCategories = () => {
                     )}
                   </td>
                   <td>
-                    <button onClick={() => handleRemoveCategory(category.id)}>
+                    <button id="categoryTableButton" onClick={() => handleRemoveCategory(category.id)}>
                       Remove Category
                     </button>
                   </td>
@@ -187,7 +189,7 @@ const TaskCategories = () => {
           </table>
           <div className="save-category-container">
             {editingCategory && (
-              <button
+              <button id="categoryTableButton"
                 onClick={() =>
                   handleSaveEdit(editingCategory, editedCategoryName)
                 }

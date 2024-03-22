@@ -1,31 +1,42 @@
 /* UserManagement.css */
 
-.task-categories-page {
+.user-managment-page {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100%; /* Ensure the page takes up the full height of the viewport */
+}
+
+.content {
+  flex: 1; /* Allow content to take up remaining space */
+  padding: 20px; /* Add padding for styling */
 }
 
 .content-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  text-align: center; /* Center align the title */
+  margin-bottom: 20px; /* Add margin at the bottom to separate from other content */
 }
+
 
 .page-title {
   margin-bottom: 20px;
 }
 
-.content-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
+.user-columns {
+  display: flex; /* Arrange columns side by side */
+}
+
+.add-user-column,
+.users-board,
+.edit-user-column {
+  flex: 1; /* Each column takes up equal space */
 }
 
 .add-user-column {
-  flex: 1;
+  margin-right: 20px; /* Add margin between columns */
+}
+
+.users-board h3 {
+  text-align: center; /* Center align the heading */
 }
 
 .users-board {
@@ -35,13 +46,10 @@
   margin-right: 20px; /* Add margin for spacing */
 }
 
-.add-user-column h2 {
+.add-user-column h3 {
   text-align: center;
 }
 
-.users-board h3 {
-  text-align: center;
-}
 
 .users-table {
   width: 90%;
@@ -58,18 +66,30 @@
   background-color: #f0f0f0;
 }
 
+.users-table-button1,
 .users-table-button {
   cursor: pointer;
   padding: 5px 10px;
   margin-right: 5px;
-  background-color: #515355;
+  background-color: #007bff;
+  border: 1px solid white;
   color: #fff;
-  border: none;
   border-radius: 5px;
+  display: block; /* Convert buttons into block-level elements */
+  margin: auto; 
 }
 
+.users-table-button {
+  background-color: #007bff;
+}
+
+.users-table-button1 {
+  background-color: #59b7f7;
+}
+
+.users-table-button1:hover,
 .users-table-button:hover {
-  background-color: #333;
+  background-color: #0056b3;
 }
 
 .homeMenu-button-container {
@@ -78,21 +98,23 @@
   margin-top: 20px;
 }
 
-.users-button {
+#usersBackButton{
+  margin-top: 45px;
   cursor: pointer;
   padding: 10px 20px;
-  background-color: #515355;
   color: #fff;
   border: none;
   border-radius: 5px;
+  background-color: #007bff;
 }
 
-.users-button:hover {
-  background-color: #333;
+#usersBackButton:hover {
+  background-color: #0056b3;
 }
 
 .add-user-form {
-  width: 300px; /* Adjust the width as needed */
+  width: 300px;
+  margin: 0 auto; 
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -107,11 +129,14 @@
 .add-user-form button {
   width: 50%;
   margin: 0 auto;
-  margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+.add-user-form button:hover {
+  background-color: #0056b3;
 }
 
 .add-user-form input,
@@ -176,7 +201,7 @@
   border-radius: 5px; /* Add border radius for styling */
 }
 
-.profile-details h2 {
+.profile-details h3 {
   margin-bottom: 20px;
 }
 
@@ -194,11 +219,12 @@
   box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
+
 .profile-details button {
   width: calc(100% - 20px); /* Adjusting width to account for padding */
   padding: 10px;
   margin-top: 10px;
-  border: none;
+  border: 1px solid white;
   border-radius: 4px;
   cursor: pointer;
   background-color: #007bff; /* Primary button color */
@@ -215,4 +241,22 @@
 
 .button-container {
   display: inline-block; /* Ensure the container only takes up as much width as its contents */
+}
+
+#usersProfileTitle,
+#usersTableTitle,
+#addUserTitle{
+  text-align: center;
+}
+
+#addUserTitle{
+  margin-bottom: 85px;
+}
+
+#otherUserProfile{
+  margin-bottom: 23px;
+}
+
+#otherUserButton{
+  width: 60%;
 }

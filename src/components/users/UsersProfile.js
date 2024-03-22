@@ -118,11 +118,10 @@ function UsersProfile() {
   return (
     <div>
       <div className="otherUserProfile">
-        <h3 id="select-title">Consult Users Profile</h3>
         <div>
           <label htmlFor="user">Choose user:</label>
           <br />
-          <select id="user" onChange={handleSelect} value={selectedUsername}>
+          <select id="otherUserProfile" onChange={handleSelect} value={selectedUsername}>
             <option value="">Select Username</option>
             {usernames.map((username) => (
               <option key={username.id} value={username.username}>
@@ -185,8 +184,8 @@ function UsersProfile() {
             setSelectedUser({ ...selectedUser, photo: e.target.value })
           }
         />
-        {(role === "PRODUCT_OWNER" && <button onClick={handleUpdateOthersProfile}>Update Profile</button>)}
-        <button onClick={handleCancel}>Cancel</button>
+        {(role === "PRODUCT_OWNER" && <button id="otherUserButton" onClick={handleUpdateOthersProfile}>Update Profile</button>)}
+        <button id="otherUserButton" onClick={handleCancel}>Cancel</button>
       </div>
     </div>
   );
