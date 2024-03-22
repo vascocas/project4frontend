@@ -11,6 +11,7 @@
 
 #home-page-wrap {
   max-height: 1000px;
+  background-color: #fcfafa;
 }
 
 .content-wrapper {
@@ -28,6 +29,7 @@
   border-radius: 5px; /* Add border radius for rounded corners */
   padding: 10px; /* Add padding inside the columns */
   height: 90vh;
+  background-color: #f1efef;
 }
 
 .tasks-board {

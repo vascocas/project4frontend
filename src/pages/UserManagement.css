@@ -157,10 +157,54 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  width: 35%;
 }
 
 .modal-buttons button {
-  margin-top: 10px;
-  margin-right: 30px;
+  margin: 0px;
   height: 30px;
+  text-align: center; 
+  line-height: 0px;
+}
+
+.profile-details {
+  width: 300px;
+  margin: 0 auto; /* Center the profile details */
+  text-align: center;
+  padding: 20px; /* Add padding for styling */
+  border: 1px solid #ccc; /* Add border for styling */
+  border-radius: 5px; /* Add border radius for styling */
+}
+
+.profile-details h2 {
+  margin-bottom: 20px;
+}
+
+.profile-details label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.profile-details input {
+  width: calc(100% - 20px); /* Adjusting width to account for padding */
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.profile-details button {
+  width: calc(100% - 20px); /* Adjusting width to account for padding */
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff; /* Primary button color */
+  color: #fff; /* Text color */
+}
+
+.profile-details button:hover {
+  background-color: #0056b3; /* Darker color on hover */
 }

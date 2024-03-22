@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { userStore } from "../../stores/UserStore";
+import "./TasksBoard.css";
 
 const UsersFilter = ({ onFilter }) => {
   const { token, usernames, setUsernames } = userStore();
@@ -50,6 +51,7 @@ const UsersFilter = ({ onFilter }) => {
       <label htmlFor="user">Tasks by User: </label>
       <br></br>
       <select
+      className="user-filter"
         id="user"
         value={selectedUser}
         onChange={(e) => setSelectedUser(e.target.value)}
@@ -61,7 +63,7 @@ const UsersFilter = ({ onFilter }) => {
           </option>
         ))}
       </select>
-      <button onClick={handleFilter}>Filter</button>
+      <button className="user-filter" onClick={handleFilter}>Filter</button>
     </div>
   );
 };

@@ -2,7 +2,7 @@
 .task-columns {
   display: flex;
   justify-content: space-between;
-  background-color: aliceblue;
+  background-color: white;
 }
 
 .tasks-board {
@@ -78,9 +78,15 @@
 }
 
 .tasks-button {
+  background-color: #aeb0b3;
+  border: 1px solid #515355;
+  border-radius: 5px;
   cursor: pointer;
 }
 
+.user-filter:hover,
+.category-filter:hover,
+.remove-all:hover,
 .tasks-button:hover {
   background-color: #515355;
   border: 1px solid #dbdbdb;

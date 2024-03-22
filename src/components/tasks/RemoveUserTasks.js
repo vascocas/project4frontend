@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { userStore } from "../../stores/UserStore";
+import "./TasksBoard.css";
 
 const RemoveUserTasks = ({ fetchTasks }) => {
   const { token, usernames } = userStore();
@@ -39,6 +40,7 @@ const RemoveUserTasks = ({ fetchTasks }) => {
       <label htmlFor="user">Remove all user tasks:</label>
       <br />
       <select
+      className="remove-all"
         id="user"
         value={selectedUser}
         onChange={(e) => setSelectedUser(e.target.value)}
@@ -50,7 +52,7 @@ const RemoveUserTasks = ({ fetchTasks }) => {
           </option>
         ))}
       </select>
-      <button onClick={handleRemove}>Remove</button>
+      <button className="remove-all" onClick={handleRemove}>Remove</button>
     </div>
   );
 };

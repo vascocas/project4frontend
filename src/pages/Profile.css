@@ -5,7 +5,6 @@
 
 .profile-details h2 {
   margin-bottom: 20px;
-  text-align: center;
 }
 
 .profile-details label {
@@ -31,5 +30,5 @@
 }
 
 .profile-details button:hover {
-  background-color: #515355;
+  background-color: #0056b3;
 }

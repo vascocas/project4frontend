@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { taskStore } from "../../stores/TaskStore";
+import "./TasksBoard.css";
 
 const CategoriesFilter = ({ onFilter }) => {
   const { categories } = taskStore();
@@ -19,6 +20,7 @@ const CategoriesFilter = ({ onFilter }) => {
       <label htmlFor="category">Tasks by Category: </label>
       <br></br>
       <select
+      className="category-filter"
         id="category"
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
@@ -30,7 +32,7 @@ const CategoriesFilter = ({ onFilter }) => {
           </option>
         ))}
       </select>
-      <button onClick={handleFilter}>Filter</button>
+      <button className="category-filter" onClick={handleFilter}>Filter</button>
     </div>
   );
 };
