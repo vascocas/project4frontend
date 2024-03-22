@@ -135,6 +135,7 @@ function Profile() {
     <div className="userProfile">
       <Header />
       <Sidebar />
+      <div className="left-page-wrap"></div>
       <div className="profile-details">
         <h2>My Profile</h2>
         <label htmlFor="username">Username</label>
@@ -186,6 +187,7 @@ function Profile() {
           Change Password
         </button>
       </div>
+      <div className="right-page-wrap"></div>
     </div>
   );
 }
