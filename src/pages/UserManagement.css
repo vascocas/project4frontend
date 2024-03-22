@@ -208,3 +208,11 @@
 .profile-details button:hover {
   background-color: #0056b3; /* Darker color on hover */
 }
+
+.add-button-warning {
+  text-align: center; /* Center align the contents */
+}
+
+.button-container {
+  display: inline-block; /* Ensure the container only takes up as much width as its contents */
+}

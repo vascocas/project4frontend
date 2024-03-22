@@ -177,13 +177,13 @@ const UserManagement = () => {
         outerContainerId={"managment-page"}
       />
       <div className="content">
+      <div className="content-title">
+      <h1 className="page-title">User Management</h1>
+      </div>
         <div className="add-user-column">
         {(role === "PRODUCT_OWNER" && <AddUserForm />)}
         </div>
-        {(role === "PRODUCT_OWNER" &&  <div className="users-board">
-          <div className="content-title">
-            <h1 className="page-title">User Management</h1>
-          </div>
+        {(role === "PRODUCT_OWNER" &&  <div className="users-board">          
           <h3>User List</h3>
           <table className="users-table">
             <thead>

@@ -67,6 +67,12 @@ function TaskCard({ title, priority, taskId, state, creator }) {
     setSelectedColumn(e.target.value);
   };
 
+  // Handle Move Task Cancel
+  const handleMoveCancel = () => {
+    setShowMoveOptions(false); // Hide move options
+    setShowOptions(true); // Show the three option buttons
+  };  
+
   // Handle Move Task Confirmation
   const handleMoveConfirm = async () => {
     if (!selectedColumn) {
@@ -159,7 +165,7 @@ function TaskCard({ title, priority, taskId, state, creator }) {
         )}
         {showMoveOptions && (
           <>
-            <select value={selectedColumn} onChange={handleDropdownChange}>
+            <select  className="custom-select" value={selectedColumn} onChange={handleDropdownChange}>
               <option value="">Select a column</option>
               <option value="TODO">TO DO</option>
               <option value="DOING">DOING</option>
@@ -167,6 +173,9 @@ function TaskCard({ title, priority, taskId, state, creator }) {
             </select>
             <button className="tasks-button" onClick={handleMoveConfirm}>
               Confirm Move
+            </button>
+            <button className="tasks-button" onClick={handleMoveCancel}>
+              Cancel
             </button>
           </>
         )}

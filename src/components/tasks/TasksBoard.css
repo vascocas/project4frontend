@@ -77,8 +77,9 @@
   font-weight: bold;
 }
 
+.custom-select,
 .tasks-button {
-  background-color: #aeb0b3;
+  background-color: #c6c8ca;
   border: 1px solid #515355;
   border-radius: 5px;
   cursor: pointer;
@@ -87,8 +88,9 @@
 .user-filter:hover,
 .category-filter:hover,
 .remove-all:hover,
+.custom-select:hover,
 .tasks-button:hover {
-  background-color: #515355;
+  background-color: #8a8a8f;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
 }

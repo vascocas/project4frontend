@@ -191,8 +191,10 @@ function AddUserForm() {
         <option value="SCRUM_MASTER">Scrum Master</option>
         <option value="PRODUCT_OWNER">Product Owner</option>
       </select>
-      <button onClick={handleAddUser}>Add User</button>
+      <div className="add-button-warning">
+      <button id="addUserButton" onClick={handleAddUser}>Add User</button>
       <p id="warningMessage1">{message}</p>
+      </div>
     </div>
   );
 }
