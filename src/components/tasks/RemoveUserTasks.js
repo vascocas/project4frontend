@@ -40,7 +40,7 @@ const RemoveUserTasks = ({ fetchTasks }) => {
       <label htmlFor="user">Remove all user tasks:</label>
       <br />
       <select
-      className="remove-all"
+      className="remove-all-select"
         id="user"
         value={selectedUser}
         onChange={(e) => setSelectedUser(e.target.value)}

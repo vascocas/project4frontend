@@ -22,11 +22,11 @@ function App() {
         <h1>Welcome to Scrum Board</h1>
         {isLoginPage ? <Login /> : <Register />}
         {isLoginPage ? (
-          <button onClick={goToRegisterPage}>
+          <button id="appButton" onClick={goToRegisterPage}>
             Register
           </button>
         ) : (
-          <button onClick={goToLoginPage}>
+          <button id="appButton" onClick={goToLoginPage}>
             Login
           </button>
         )}

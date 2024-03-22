@@ -20,7 +20,7 @@ const CategoriesFilter = ({ onFilter }) => {
       <label htmlFor="category">Tasks by Category: </label>
       <br></br>
       <select
-      className="category-filter"
+      className="category-filter-select"
         id="category"
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}

@@ -51,7 +51,7 @@ const UsersFilter = ({ onFilter }) => {
       <label htmlFor="user">Tasks by User: </label>
       <br></br>
       <select
-      className="user-filter"
+      className="user-filter-select"
         id="user"
         value={selectedUser}
         onChange={(e) => setSelectedUser(e.target.value)}

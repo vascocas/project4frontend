@@ -42,13 +42,12 @@
 
 #categoryTableButton{
   cursor: pointer;
-  padding: 5px 10px;
-  margin-right: 5px;
+  padding: 8px 10px;
   background-color: #007bff;
-  border: 1px solid white;
+  border: none;
   color: #fff;
   border-radius: 5px;
-  display: block; /* Convert buttons into block-level elements */
+  display: block;
   margin: auto; 
 }
 
@@ -60,14 +59,6 @@
   width: 400px;
 }
 
-.input-category-container button{
-  cursor: pointer;
-  background-color: #007bff;
-  border: 1px solid white;
-  color: #fff;
-  border-radius: 5px;
-}
-
 .homeMenu-button-container {
   display: flex;
   justify-content: center;
@@ -75,15 +66,17 @@
   margin-bottom: 20px; /* Add space below */
 }
 
+.input-category-container button,
 .homeMenu-button-container button {
   cursor: pointer;
-  padding: 10px 20px; /* Adjust padding */
+  padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
 }
 
+.input-category-container button:hover,
 .homeMenu-button-container button:hover {
   background-color: #0056b3;
 }

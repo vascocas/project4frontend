@@ -89,10 +89,18 @@
 .category-filter:hover,
 .remove-all:hover,
 .custom-select:hover,
+#clearButton:hover,
 .tasks-button:hover {
+  cursor: pointer;
   background-color: #8a8a8f;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
+}
+
+.remove-all-select,
+.user-filter-select,
+.category-filter-select:hover{
+  cursor: pointer;
 }
 
 #filtersTitle {

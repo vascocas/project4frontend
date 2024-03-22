@@ -35,7 +35,7 @@ const RecycleBin = () => {
           </div>)}
         </div>
         <div className="homeMenu-button-container">
-          <button className="recycle-button" onClick={() => navigate("/Home")}>
+          <button className="recycle-home-button" onClick={() => navigate("/Home")}>
             Back to Scrum Board
           </button>
         </div>

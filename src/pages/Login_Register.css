@@ -30,6 +30,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin: 15px;
   }
 
   input#username,
@@ -46,6 +47,7 @@
     height: 40px;
     width: 150px;
     align-self: center;
+    margin-top: 15px;
   }
   
   input[type="submit"]:hover {
