@@ -2,6 +2,7 @@
 .task-columns {
   display: flex;
   justify-content: space-between;
+  background-color: aliceblue;
 }
 
 .tasks-board {
@@ -35,17 +36,46 @@
 .task-card {
   margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #ccc;
+  background-color:#ebebeb;
   border-radius: 5px;
   border-radius: 5px;
   position: relative;
 }
 
+.task-card.low-priority::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px; /* Adjust thickness of the strip */
+  height: 100%; /* Make the strip cover the entire height of the card */
+  background-color: green; /* Low priority color */
+}
+
+.task-card.medium-priority::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px; /* Adjust thickness of the strip */
+  height: 100%; /* Make the strip cover the entire height of the card */
+  background-color: yellow; /* Medium priority color */
+}
+
+.task-card.high-priority::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px; /* Adjust thickness of the strip */
+  height: 100%; /* Make the strip cover the entire height of the card */
+  background-color: red; /* High priority color */
+}
+
 .card-header {
   font-weight: bold;
 }
-
-
 
 .tasks-button {
   cursor: pointer;
@@ -75,52 +105,3 @@
   margin-right: 10px;
 }
 
-
-
-.task-card.low-priority {
-  background-color: green;
-}
-
-.task-card.medium-priority {
-  background-color: yellow;
-}
-
-.task-card.high-priority {
-  background-color: red;
-}
-
-
-
-.task-card.priority-low {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px; /* Adjust thickness of strip */
-  height: 100%;
-  background-color: green; /* Low priority color */
-}
-
-.task-card.priority-medium::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px; /* Adjust thickness of strip */
-  height: 100%;
-  background-color: yellow; /* Medium priority color */
-}
-
-.task-card.priority-high::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px; /* Adjust thickness of strip */
-  height: 100%;
-  background-color: red; /* High priority color */
-}
-
-.card-header {
-  font-weight: bold;
-}

@@ -14,8 +14,6 @@ function AddTaskForm() {
   const [category, setCategory] = useState("");
   const [message, setMessage] = useState("");
 
-
-
   useEffect(() => {
     if (token) {
       // Get all categories to populate categories dropdown menu
@@ -108,83 +106,83 @@ function AddTaskForm() {
     }
   };
 
-
   return (
     <aside className="add-task-sidebar">
       <div className="add-task-container">
         <h3 id="addTask-h3">Add task</h3>
-        <label className="labels-task-name" htmlFor="taskName">
-          Title
-        </label>
-        <input
-          type="text"
-          id="taskName"
-          placeholder="Insert title"
-          maxLength="20"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <label className="labels-task-description" htmlFor="taskDescription">
-          Description
-        </label>
-        <textarea
-          id="taskDescription"
-          placeholder="Insert description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-        <label className="labels-task-dates" htmlFor="startDate">
-          Start date
-        </label>
-        <input
-          type="date"
-          id="startDate"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        <label className="labels-task-dates" htmlFor="endDate">
-          End date
-        </label>
-        <input
-          type="date"
-          id="endDate"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
-        <label htmlFor="priority">Priority</label>
-        <div className="dropdown-priority">
-          <select
-            id="dropdown-task-priority"
-            value={priority}
-            onChange={handlePriorityChange}
-          >
-            <option value="">Select priority</option>
-            <option value="LOW_PRIORITY">Low</option>
-            <option value="MEDIUM_PRIORITY">Medium</option>
-            <option value="HIGH_PRIORITY">High</option>
-          </select>
-        </div>
-        <div className="dropdown-category">
-          <label
-            className="labels-task-category"
-            htmlFor="dropdown-task-categories"
-          >
-            Category
+        <div className="input-fields-container">
+          <label className="labels-task-name" htmlFor="taskName">
+            Title
           </label>
-          <select
-            name="task-categories"
-            id="dropdown-task-categories"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="">Select category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-          <div className="add-button">
+          <input
+            type="text"
+            id="taskName"
+            placeholder="Insert title"
+            maxLength="20"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <label className="labels-task-description" htmlFor="taskDescription">
+            Description
+          </label>
+          <textarea
+            id="taskDescription"
+            placeholder="Insert description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+          <label className="labels-task-dates" htmlFor="startDate">
+            Start date
+          </label>
+          <input
+            type="date"
+            id="startDate"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <label className="labels-task-dates" htmlFor="endDate">
+            End date
+          </label>
+          <input
+            type="date"
+            id="endDate"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+          <label className="labels-task-priority" htmlFor="priority">Priority</label>
+          <div className="dropdown-priority">
+            <select
+              id="dropdown-task-priority"
+              value={priority}
+              onChange={handlePriorityChange}
+            >
+              <option value="">Select priority</option>
+              <option value="LOW_PRIORITY">Low</option>
+              <option value="MEDIUM_PRIORITY">Medium</option>
+              <option value="HIGH_PRIORITY">High</option>
+            </select>
+          </div>
+          <div className="dropdown-category">
+            <label
+              className="labels-task-category"
+              htmlFor="dropdown-task-categories"
+            >
+              Category
+            </label>
+            <select
+              name="task-categories"
+              id="dropdown-task-categories"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Select category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+            <div className="add-button"></div>
             <button id="addTask" onClick={handleAddTask}>
               Add task
             </button>
