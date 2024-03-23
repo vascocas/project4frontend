@@ -78,8 +78,8 @@ const UserRecycle = () => {
       <tbody>
         {deletedUsers.map((user) => (
           <tr key={user.id}>
-            <td>{user.id}</td>
-            <td>{user.username}</td>
+            <td className="table-row-recycle">{user.id}</td>
+            <td className="table-row-recycle">{user.username}</td>
             <td>
               <button className="recycle-button" onClick={() => removeUser(user.id)}>Remove User</button>
             </td>

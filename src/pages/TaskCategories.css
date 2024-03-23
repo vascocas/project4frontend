@@ -22,6 +22,12 @@
 
 .table-header-category {
   padding: 10px;
+  text-align: center;
+}
+
+.table-row-category,
+.clickable text-center{
+  text-align: center;
 }
 
 .save-category-container,

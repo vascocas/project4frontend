@@ -23,7 +23,7 @@ function UsersProfile() {
       try {
         if (!selectedUsername) return;
         const response = await fetch(
-          `http://localhost:8080/project4vc/rest/users/${selectedUsername}`,
+          `http://localhost:8080/project4vc/rest/users/username/?username=${selectedUsername}`,
           {
             method: "GET",
             headers: {

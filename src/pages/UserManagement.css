@@ -60,10 +60,12 @@
   padding: 10px;
   border: 1px solid white;
   background-color: #f0f0f0;
+  text-align: center;
 }
 
 .users-table td {
   padding: 10px;
+  text-align: center;
 }
 
 .users-table-button1,
@@ -210,14 +212,14 @@
 }
 
 .profile-details input {
-  width: calc(100% - 20px); /* Adjusting width to account for padding */
+  width: calc(100% - 20px);
   padding: 8px;
-  margin-bottom: 15px;
+  margin-left: auto;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
+  box-sizing: border-box;
 }
-
 
 .profile-details button {
   width: calc(100% - 20px); /* Adjusting width to account for padding */

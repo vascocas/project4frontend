@@ -62,11 +62,10 @@ const TaskCategories = () => {
         alert("Category updated successfully");
         fetchCategories();
       } else {
-        throw new Error(`Failed to update category: ${response.text()}`);
+        console.log("Impossible to update category name");
       }
     } catch (error) {
-      console.error("Error editing category:", error);
-      alert("Error editing category");
+      alert("Category with this name already exists");
     }
   };
 
@@ -158,9 +157,9 @@ const TaskCategories = () => {
             <tbody>
               {categories.map((category) => (
                 <tr key={category.id}>
-                  <td>{category.id}</td>
+                  <td className="table-row-category">{category.id}</td>
                   <td
-                    className="clickable text-center"
+                    className="table-row-category"
                     onDoubleClick={() =>
                       handleEditCategoryName(category.id, category.name)
                     }

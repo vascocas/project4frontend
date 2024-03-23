@@ -107,8 +107,8 @@ const TaskRecycle = () => {
       <tbody>
         {deletedTasks.map((task) => (
           <tr key={task.id}>
-            <td>{task.id}</td>
-            <td>{task.title}</td>
+            <td className="table-row-recycle">{task.id}</td>
+            <td className="table-row-recycle">{task.title}</td>
             {(role === "PRODUCT_OWNER" && <td>
               <button className="recycle-button" onClick={() => restoreTask(task.id)}>Restore Task</button>
               <button className="recycle-button" onClick={() => removeTask(task.id)}>Remove Task</button>
