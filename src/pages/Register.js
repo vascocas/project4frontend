@@ -45,14 +45,13 @@ function Register() {
     }
 
     // Check password length and strong password using regular expression
-    const strongPasswordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/;
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/;
     if (password.length < 4 || !strongPasswordRegex.test(password)) {
       if (password.length < 4) {
         alert("Password must be at least 4 characters long");
       } else {
         alert(
-          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+          "Password must contain at least one uppercase letter, one lowercase letter and one number"
         );
       }
       return;
@@ -63,6 +62,8 @@ function Register() {
       alert("Passwords do not match");
       return;
     }
+
+    let message;
 
     try {
       const response = await fetch(
@@ -84,16 +85,18 @@ function Register() {
           }),
         }
       );
-
-      if (!response.ok) {
-        throw new Error("Registration failed");
+      if (response.ok) {
+        message = await response.text();
+        alert(message);
+        navigate("/", { replace: true });
+        setIsLoginPage(true);
+      } else {
+        message = await response.text();
+        alert(message);
       }
-      alert("Successful Registration");
-      navigate("/", { replace: true });
-      setIsLoginPage(true);
     } catch (error) {
+      alert(message);
       console.error("Error registering:", error);
-      alert("Registration failed. Verify all fields.");
     }
   };
 
@@ -122,8 +125,7 @@ function Register() {
             />
             <span className="help-tip">
               Password must be at least 4 characters long and contain at least
-              one uppercase letter, one lowercase letter, one number, and one
-              special character
+              one uppercase letter, one lowercase letter, one number
             </span>
           </label>
           <label>

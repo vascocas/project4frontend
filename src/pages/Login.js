@@ -17,7 +17,15 @@ function Login() {
     event.preventDefault();
     const { username, password } = inputs;
 
-    try {     
+    // Input validations
+    if (!username.trim() || !password.trim()) {
+      alert("Username and password cannot be empty.");
+      return;
+    }
+
+    let message;
+
+    try {
       const response = await fetch(
         "http://localhost:8080/project4vc/rest/users/login",
         {
@@ -30,22 +38,23 @@ function Login() {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Login failed");
+      if (response.ok) {
+        const loginDto = await response.json();
+        // Update userStore
+        updateUsername(loginDto.username);
+        updateToken(loginDto.token);
+        updateRole(loginDto.role);
+        updatePhoto(loginDto.photo);
+        console.log("Successful Login!");
+        // Go to the Home page
+        navigate("/home", { replace: true });
+      } else {
+        message = await response.text();
+        alert(message);
       }
-
-      const loginDto = await response.json();
-
-      // Update userStore
-      updateUsername(loginDto.username);
-      updateToken(loginDto.token);
-      updateRole(loginDto.role);
-      updatePhoto(loginDto.photo);
-
-      navigate("/home", { replace: true });
     } catch (error) {
       console.error("Error logging in:", error);
-      alert("Login failed. Please try again.");
+      alert(message);
     }
   };
 

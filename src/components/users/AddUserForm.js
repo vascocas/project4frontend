@@ -43,8 +43,7 @@ function AddUserForm() {
       }
 
       // Check password length and strong password using regular expression
-      const strongPasswordRegex =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/;
+      const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/;
       if (
         inputs.password.length < 4 ||
         !strongPasswordRegex.test(inputs.password)
@@ -53,7 +52,7 @@ function AddUserForm() {
           alert("Password must be at least 4 characters long");
         } else {
           alert(
-            "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+            "Password must contain at least one uppercase letter, one lowercase letter and one number"
           );
         }
         return;
